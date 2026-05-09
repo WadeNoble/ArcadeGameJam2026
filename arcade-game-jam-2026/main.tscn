@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://b7t7gxnlcsx3q"]
+
+[ext_resource type="Texture2D" uid="uid://v35s6rxe3l7n" path="res://assets/images/icon.svg" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://drj3b6ormgaud" path="res://player.tscn" id="2_0xm2m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(123, 128)
+
+[node name="MainGame" type="Node" unique_id=187935485]
+
+[node name="World" type="Node2D" parent="." unique_id=1337486575]
+
+[node name="LevelLayer" type="Node2D" parent="World" unique_id=1818238437]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/LevelLayer" unique_id=633419958]
+position = Vector2(137, 274)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="World/LevelLayer/StaticBody2D" unique_id=1416800544]
+texture = ExtResource("1_ig7tw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LevelLayer/StaticBody2D" unique_id=782274246]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="Entities" type="Node2D" parent="World" unique_id=1864856940]
+
+[node name="Player" parent="World/Entities" unique_id=1733925489 instance=ExtResource("2_0xm2m")]
+position = Vector2(135, 189)
+
+[node name="HudCanvasLayer" type="CanvasLayer" parent="." unique_id=826517499]
+visible = false
+
+[node name="HudRoot" type="Control" parent="HudCanvasLayer" unique_id=96838891]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="PauseCanvasLayer" type="CanvasLayer" parent="." unique_id=1410220163]
+visible = false
+
+[node name="PauseRoot" type="Control" parent="PauseCanvasLayer" unique_id=1559990446]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
