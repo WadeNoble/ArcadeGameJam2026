@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dxmv284minroa"]
+
+[ext_resource type="Shader" uid="uid://ba8oela4x632b" path="res://scroll.gdshader" id="1_7vrkn"]
+[ext_resource type="Texture2D" uid="uid://cbd4clyjjmn51" path="res://assets/images/UI/testmenuBG.png" id="2_fu7sn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7vrkn"]
+shader = ExtResource("1_7vrkn")
+shader_parameter/scroll_speed = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7vrkn"]
+
+[node name="MainMenu" type="Control" unique_id=1909294033]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=665526954]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="Pattern" type="TextureRect" parent="." unique_id=2085952757]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_7vrkn")
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("2_fu7sn")
+stretch_mode = 1
+
+[node name="Menu?" type="TextureRect" parent="." unique_id=1911912592]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -90.0
+offset_right = 190.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_7vrkn")
