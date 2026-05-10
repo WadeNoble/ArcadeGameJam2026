@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://v35s6rxe3l7n" path="res://assets/images/icon.svg" id="1_dp2nx"]
 [ext_resource type="Texture2D" uid="uid://72agf7cnbwyd" path="res://assets/images/level/monochrome_tilemap.png" id="1_i88ab"]
+[ext_resource type="Script" uid="uid://brvg5u08udr06" path="res://scripts/camera_2d.gd" id="1_srhd0"]
 [ext_resource type="PackedScene" uid="uid://drj3b6ormgaud" path="res://player.tscn" id="2_v6f5v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v6f5v"]
@@ -1015,8 +1016,10 @@ sources/0 = SubResource("TileSetAtlasSource_pi5jr")
 
 [node name="LevelRoot" type="Node2D" unique_id=2091582755]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=93839540]
+[node name="Camera" type="Camera2D" parent="." unique_id=93839540]
 position = Vector2(320, 180)
+drag_horizontal_enabled = true
+script = ExtResource("1_srhd0")
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=423194878]
 scroll_scale = Vector2(0.5, 0.5)
