@@ -29,8 +29,12 @@ func _physics_process(delta: float) -> void:
 			velocity += get_gravity() * delta
 		else:
 			velocity.y = FASTFALL_SPEED
-		animated_sprite_2d.animation = "jump"
-
+			
+		if has_double_jump:
+			animated_sprite_2d.animation = "jump"
+		else:
+			animated_sprite_2d.animation = "jump2"	
+			
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -42,10 +46,11 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	#Handle animation
-	if velocity.x != 0:
-		animated_sprite_2d.animation = "walk"
-	else:
-		animated_sprite_2d.animation = "idle"
+	if is_on_floor():
+		if velocity.x != 0:
+			animated_sprite_2d.animation = "walk"
+		else:
+			animated_sprite_2d.animation = "idle"
 	if direction == 1.0:
 		animated_sprite_2d.flip_h = false
 	elif direction == -1.0:

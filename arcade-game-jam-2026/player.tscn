@@ -1,56 +1,88 @@
 [gd_scene format=3 uid="uid://drj3b6ormgaud"]
 
-[ext_resource type="Texture2D" uid="uid://co43wbxyg2g3w" path="res://assets/images/player/playertest.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://bsvvbcoe14m6g" path="res://scripts/player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://cvfjb3ysqn3pj" path="res://assets/images/player/playertestv2.png" id="2_onrkg"]
-[ext_resource type="AudioStream" uid="uid://d0f1ritefbp1u" path="res://assets/sfx/placeholderjump.mp3" id="4_hqtel"]
+[ext_resource type="Texture2D" uid="uid://l1jljggq8wps" path="res://assets/images/player/playertestv3.png" id="2_sweqy"]
+[ext_resource type="AudioStream" uid="uid://cusju2nhpfw7w" path="res://assets/sfx/placeholderlaser.wav" id="4_2hs0m"]
 [ext_resource type="Script" uid="uid://djuisegy3uin3" path="res://scripts/shooter.gd" id="4_sweqy"]
-[ext_resource type="AudioStream" uid="uid://dkfpxtxjil4qu" path="res://assets/sfx/placeholderlaser.mp3" id="5_2hs0m"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
-atlas = ExtResource("2_onrkg")
-region = Rect2(0, 0, 32, 32)
+[ext_resource type="AudioStream" uid="uid://c13f755mk8486" path="res://assets/sfx/placeholderjump.wav" id="5_sweqy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
-atlas = ExtResource("1_4flbx")
+atlas = ExtResource("2_sweqy")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
-atlas = ExtResource("2_onrkg")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("2_sweqy")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
-atlas = ExtResource("2_onrkg")
+atlas = ExtResource("2_sweqy")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
+atlas = ExtResource("2_sweqy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvl01"]
+atlas = ExtResource("2_sweqy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivps1"]
+atlas = ExtResource("2_sweqy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b26j0"]
+atlas = ExtResource("2_sweqy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
+atlas = ExtResource("2_sweqy")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sweqy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i3pqv")
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2hs0m")
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw050")
 }],
 "loop": true,
 "name": &"jump",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hqtel")
+"texture": SubResource("AtlasTexture_nvl01")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sweqy")
+"texture": SubResource("AtlasTexture_ivps1")
+}],
+"loop": true,
+"name": &"jump2",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b26j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7ghd")
 }],
 "loop": true,
 "name": &"walk",
-"speed": 10.0
+"speed": 12.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqtel"]
@@ -62,14 +94,14 @@ script = ExtResource("1_onrkg")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1692457695]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_sweqy")
-animation = &"idle"
+animation = &"jump2"
 autoplay = "idle"
 
 [node name="Shooter" type="Marker2D" parent="AnimatedSprite2D" unique_id=1927466382]
 script = ExtResource("4_sweqy")
 
 [node name="Shooting" type="AudioStreamPlayer2D" parent="AnimatedSprite2D/Shooter" unique_id=870307796]
-stream = ExtResource("5_2hs0m")
+stream = ExtResource("4_2hs0m")
 
 [node name="Cooldown" type="Timer" parent="AnimatedSprite2D/Shooter" unique_id=877374868]
 wait_time = 0.25
@@ -79,5 +111,5 @@ position = Vector2(-0.125, 0)
 shape = SubResource("CapsuleShape2D_hqtel")
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1857952113]
-stream = ExtResource("4_hqtel")
+stream = ExtResource("5_sweqy")
 volume_db = -5.0
