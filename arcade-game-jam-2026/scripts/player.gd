@@ -46,7 +46,9 @@ func _physics_process(delta: float) -> void:
 		if airdashing:
 			pass
 		elif (velocity.x * direction > WALK_SPEED):
-			velocity.x = move_toward(velocity.x, direction * WALK_SPEED, FRICTION*delta*.5)
+			velocity.x = move_toward(velocity.x, direction * WALK_SPEED, FRICTION*delta*.25)
+		elif (velocity.x * direction < -WALK_SPEED):
+			velocity.x = move_toward(velocity.x, direction * WALK_SPEED, FRICTION*delta*6)
 		else:
 			velocity.x = direction * WALK_SPEED
 	else:

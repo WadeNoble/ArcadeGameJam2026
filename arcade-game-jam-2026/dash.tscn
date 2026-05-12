@@ -31,9 +31,14 @@ size = Vector2(16, 16)
 [node name="DashEffect" type="RigidBody2D" unique_id=2082273610]
 script = ExtResource("1_tkrbt")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=361502892]
+[node name="Plume" type="AnimatedSprite2D" parent="." unique_id=361502892]
 sprite_frames = SubResource("SpriteFrames_f1w7f")
-frame_progress = 0.5269913
+frame_progress = 0.8384245
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2012836757]
 shape = SubResource("RectangleShape2D_7qctt")
+
+[node name="Timer" type="Timer" parent="." unique_id=1061487342]
+wait_time = 0.05
+
+[connection signal="timeout" from="Timer" to="." method="destroy"]
