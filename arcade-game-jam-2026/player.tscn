@@ -1,62 +1,116 @@
 [gd_scene format=3 uid="uid://drj3b6ormgaud"]
 
-[ext_resource type="Texture2D" uid="uid://co43wbxyg2g3w" path="res://assets/images/player/playertest.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://bsvvbcoe14m6g" path="res://scripts/player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://cvfjb3ysqn3pj" path="res://assets/images/player/playertestv2.png" id="2_onrkg"]
-[ext_resource type="AudioStream" uid="uid://d0f1ritefbp1u" path="res://assets/sfx/placeholderjump.mp3" id="4_hqtel"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
-atlas = ExtResource("2_onrkg")
-region = Rect2(0, 0, 32, 32)
+[ext_resource type="Texture2D" uid="uid://l1jljggq8wps" path="res://assets/images/player/playertestv3.png" id="2_sweqy"]
+[ext_resource type="AudioStream" uid="uid://cdlvrr53cxdji" path="res://assets/sfx/placeholderkick.wav" id="4_2hs0m"]
+[ext_resource type="Script" uid="uid://djuisegy3uin3" path="res://scripts/shooter.gd" id="4_sweqy"]
+[ext_resource type="AudioStream" uid="uid://c13f755mk8486" path="res://assets/sfx/placeholderjump.wav" id="5_sweqy"]
+[ext_resource type="Script" uid="uid://c1yg0ayfqly65" path="res://scripts/dasher.gd" id="6_1jxqw"]
+[ext_resource type="AudioStream" uid="uid://ds64jpqddj5jo" path="res://assets/sfx/placeholderbang.wav" id="6_2hs0m"]
+[ext_resource type="Script" uid="uid://dpvpfad1ngbo7" path="res://scripts/duster.gd" id="7_dw050"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
-atlas = ExtResource("1_4flbx")
+atlas = ExtResource("2_sweqy")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
-atlas = ExtResource("2_onrkg")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("2_sweqy")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
-atlas = ExtResource("2_onrkg")
+atlas = ExtResource("2_sweqy")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
+atlas = ExtResource("2_sweqy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvl01"]
+atlas = ExtResource("2_sweqy")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivps1"]
+atlas = ExtResource("2_sweqy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b26j0"]
+atlas = ExtResource("2_sweqy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
+atlas = ExtResource("2_sweqy")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sweqy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i3pqv")
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2hs0m")
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw050")
 }],
 "loop": true,
 "name": &"jump",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hqtel")
+"texture": SubResource("AtlasTexture_nvl01")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sweqy")
+"texture": SubResource("AtlasTexture_ivps1")
+}],
+"loop": true,
+"name": &"jump2",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b26j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7ghd")
 }],
 "loop": true,
 "name": &"walk",
-"speed": 10.0
+"speed": 12.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
-radius = 15.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2hs0m"]
+radius = 11.0
 height = 32.0
 
+[sub_resource type="SystemFont" id="SystemFont_1jxqw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dw050"]
+font = SubResource("SystemFont_1jxqw")
+font_size = 8
+
 [node name="Player" type="CharacterBody2D" unique_id=1733925489]
+collision_mask = 154
 script = ExtResource("1_onrkg")
+
+[node name="ShotEndlag" type="Timer" parent="." unique_id=352838634]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=957431215]
+wait_time = 0.2
+one_shot = true
+autostart = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1692457695]
 texture_filter = 1
@@ -64,9 +118,48 @@ sprite_frames = SubResource("SpriteFrames_sweqy")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="Shooter" type="Marker2D" parent="AnimatedSprite2D" unique_id=1927466382]
+script = ExtResource("4_sweqy")
+
+[node name="KickSound" type="AudioStreamPlayer2D" parent="AnimatedSprite2D/Shooter" unique_id=870307796]
+stream = ExtResource("4_2hs0m")
+volume_db = -5.0
+
+[node name="Cooldown" type="Timer" parent="AnimatedSprite2D/Shooter" unique_id=877374868]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[node name="Dasher" type="Marker2D" parent="AnimatedSprite2D" unique_id=549200940]
+position = Vector2(0, -16)
+script = ExtResource("6_1jxqw")
+
+[node name="DashSound" type="AudioStreamPlayer2D" parent="AnimatedSprite2D/Dasher" unique_id=494685354]
+stream = ExtResource("6_2hs0m")
+max_polyphony = 2
+
+[node name="DashCooldown" type="Timer" parent="AnimatedSprite2D/Dasher" unique_id=1098091075]
+wait_time = 0.15
+one_shot = true
+autostart = true
+
+[node name="Duster" type="Marker2D" parent="AnimatedSprite2D" unique_id=407869795]
+position = Vector2(0, 10)
+script = ExtResource("7_dw050")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1350459932]
-shape = SubResource("CapsuleShape2D_onrkg")
+shape = SubResource("CapsuleShape2D_2hs0m")
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1857952113]
-stream = ExtResource("4_hqtel")
+stream = ExtResource("5_sweqy")
 volume_db = -5.0
+
+[node name="Label" type="Label" parent="." unique_id=273622865]
+offset_left = -16.0
+offset_top = -27.0
+offset_right = 16.0
+offset_bottom = -4.0
+text = "   ZERO"
+label_settings = SubResource("LabelSettings_dw050")
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="freefall"]
