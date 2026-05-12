@@ -18,9 +18,9 @@ fill_to = Vector2(0.5, 0.01)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ldfn"]
 size = Vector2(16, 16)
 
-[node name="Shot" type="RigidBody2D" unique_id=98912531]
-collision_layer = 4
-collision_mask = 8
+[node name="Shot" type="RigidBody2D" unique_id=98912531 groups=["player_projectiles"]]
+collision_layer = 0
+collision_mask = 40
 gravity_scale = 0.0
 script = ExtResource("1_3ldfn")
 

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 @onready var shot_endlag: Timer = $ShotEndlag
 @onready var coyote_timer: Timer = $CoyoteTimer
+@onready var death_timer: Timer = $DeathTimer
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 @onready var shooter: Marker2D = $AnimatedSprite2D/Shooter
@@ -14,6 +15,7 @@ extends CharacterBody2D
 
 signal eggs_collected()
 signal egg_collected()
+signal died()
 
 const WALK_SPEED := 150.0
 const BOOST_SPEED := 400.0
@@ -28,10 +30,11 @@ var has_airdash := false
 var airdashing := false
 var has_coyote_time := false
 var hard_landing := false
+var is_dying := false
 
 func _physics_process(delta: float) -> void:
 	# Handle jumping. Recharge double jump if grounded
-	label.text = str(coyote_timer.time_left)
+	#label.text = str(lives)
 	if is_on_floor():
 		if hard_landing:
 			duster.dust()
@@ -131,7 +134,7 @@ func try_jump():
 	elif has_double_jump:
 		has_double_jump = false
 		velocity.x *= .9
-		#change this to seperate sound later
+		#change this later
 		jump_sound.pitch_scale = 1.2
 	else:
 		return
@@ -155,3 +158,13 @@ func try_airdash():
 			
 func freefall():
 	has_coyote_time = false
+	
+func die():
+	if is_dying:
+		return
+	
+	is_dying = true
+	animated_sprite_2d.play("explode")
+	await death_timer
+		
+	#lives -= lives

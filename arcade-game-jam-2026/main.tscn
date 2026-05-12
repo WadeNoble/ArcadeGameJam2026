@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ccqv68et5vkw8" path="res://scripts/main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dmd0dly7clgeg" path="res://level/testlevel.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://k5s14lnr45wy" path="res://scripts/pause.gd" id="3_h2yge"]
 
 [node name="MainGame" type="Node" unique_id=187935485]
 script = ExtResource("1_0xm2m")
@@ -24,16 +25,35 @@ offset_right = 640.0
 offset_bottom = 360.0
 
 [node name="PauseCanvasLayer" type="CanvasLayer" parent="." unique_id=1410220163]
-visible = false
+process_mode = 2
+script = ExtResource("3_h2yge")
 
 [node name="PauseRoot" type="Control" parent="PauseCanvasLayer" unique_id=1559990446]
+process_mode = 2
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
 
+[node name="Label" type="Label" parent="PauseCanvasLayer" unique_id=1639555696]
+process_mode = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -11.166667
+offset_right = 31.0
+offset_bottom = 11.166667
+grow_horizontal = 2
+grow_vertical = 2
+text = "PAUSE"
+horizontal_alignment = 1
+
 [node name="IdleTimeout" type="Timer" parent="." unique_id=411288496]
 wait_time = 180.0
 autostart = true
 
+[connection signal="pause_pressed" from="." to="PauseCanvasLayer" method="_on_pause_button_pressed"]
 [connection signal="timeout" from="IdleTimeout" to="." method="ggs"]

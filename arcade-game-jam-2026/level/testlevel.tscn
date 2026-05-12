@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://brvg5u08udr06" path="res://scripts/camera_2d.gd" id="1_srhd0"]
 [ext_resource type="Script" uid="uid://bjlwhqibesgk2" path="res://scripts/boundary.gd" id="2_0acls"]
-[ext_resource type="Texture2D" uid="uid://b1mqfxwbljxj3" path="res://assets/images/player/bgtest.png" id="2_srhd0"]
+[ext_resource type="Texture2D" uid="uid://b1mqfxwbljxj3" path="res://assets/images/level/bgtest.png" id="2_srhd0"]
 [ext_resource type="PackedScene" uid="uid://drj3b6ormgaud" path="res://player.tscn" id="2_v6f5v"]
 [ext_resource type="TileSet" uid="uid://vx8kta0dj1l2" path="res://level/testfloor.tres" id="4_f73ey"]
 [ext_resource type="PackedScene" uid="uid://bwvxco5le7i4q" path="res://bird.tscn" id="6_f73ey"]
+[ext_resource type="PackedScene" uid="uid://foo1m63hnjpv" path="res://enemy.tscn" id="7_h42ns"]
+[ext_resource type="AudioStream" uid="uid://di531darp3150" path="res://assets/sfx/1-01. Overworld Day.ogg" id="8_qnfh6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0acls"]
 size = Vector2(800, 32)
@@ -67,7 +69,13 @@ tile_set = ExtResource("4_f73ey")
 
 [node name="Player" parent="TileMapLayers/Ground" unique_id=1733925489 instance=ExtResource("2_v6f5v")]
 position = Vector2(62, 282)
-scale = Vector2(1.5, 1.5)
 
 [node name="MovingBird" parent="TileMapLayers/Ground" unique_id=6820801 instance=ExtResource("6_f73ey")]
 position = Vector2(637, 146)
+
+[node name="Enemy" parent="TileMapLayers/Ground" unique_id=1278857248 instance=ExtResource("7_h42ns")]
+position = Vector2(564, 158)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=365531271]
+stream = ExtResource("8_qnfh6")
+autoplay = true

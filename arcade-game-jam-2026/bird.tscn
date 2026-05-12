@@ -97,7 +97,7 @@ collision_mask = 0
 rotation = 3.1415927
 sprite_frames = SubResource("SpriteFrames_cchwj")
 animation = &"fly"
-frame_progress = 0.10295523
+frame_progress = 0.11255204
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bird" unique_id=1337300490]
 shape = SubResource("RectangleShape2D_6ljjq")

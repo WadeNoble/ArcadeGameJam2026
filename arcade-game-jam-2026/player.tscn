@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://c1yg0ayfqly65" path="res://scripts/dasher.gd" id="6_1jxqw"]
 [ext_resource type="AudioStream" uid="uid://ds64jpqddj5jo" path="res://assets/sfx/placeholderbang.wav" id="6_2hs0m"]
 [ext_resource type="Script" uid="uid://dpvpfad1ngbo7" path="res://scripts/duster.gd" id="7_dw050"]
+[ext_resource type="AudioStream" uid="uid://bq68mhvhnpqa1" path="res://assets/sfx/placeholdereat.wav" id="9_b26j0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
 atlas = ExtResource("2_sweqy")
@@ -91,11 +92,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dw050"]
 size = Vector2(20, 30)
 
-[sub_resource type="SystemFont" id="SystemFont_1jxqw"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_dw050"]
-font = SubResource("SystemFont_1jxqw")
 font_size = 8
+font_color = Color(0, 0, 0, 1)
+outline_size = 2
 
 [node name="Player" type="CharacterBody2D" unique_id=1733925489]
 collision_mask = 218
@@ -111,6 +111,10 @@ autostart = true
 wait_time = 0.2
 one_shot = true
 autostart = true
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=1624152606]
+wait_time = 5.0
+one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1692457695]
 texture_filter = 1
@@ -156,12 +160,20 @@ shape = SubResource("RectangleShape2D_dw050")
 stream = ExtResource("5_sweqy")
 volume_db = -5.0
 
+[node name="EatSound" type="AudioStreamPlayer2D" parent="." unique_id=940180180]
+stream = ExtResource("9_b26j0")
+volume_db = -5.0
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." unique_id=273099228]
+stream = ExtResource("9_b26j0")
+
 [node name="Label" type="Label" parent="." unique_id=273622865]
 offset_left = -16.0
 offset_top = -27.0
 offset_right = 16.0
 offset_bottom = -4.0
-text = "   ZERO"
+text = "ZERO"
 label_settings = SubResource("LabelSettings_dw050")
+horizontal_alignment = 1
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="freefall"]
