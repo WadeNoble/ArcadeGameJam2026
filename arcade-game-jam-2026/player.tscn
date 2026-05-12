@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cusju2nhpfw7w" path="res://assets/sfx/placeholderlaser.wav" id="4_2hs0m"]
 [ext_resource type="Script" uid="uid://djuisegy3uin3" path="res://scripts/shooter.gd" id="4_sweqy"]
 [ext_resource type="AudioStream" uid="uid://c13f755mk8486" path="res://assets/sfx/placeholderjump.wav" id="5_sweqy"]
+[ext_resource type="AudioStream" uid="uid://ds64jpqddj5jo" path="res://assets/sfx/placeholderbang.wav" id="6_2hs0m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
 atlas = ExtResource("2_sweqy")
@@ -13,6 +14,10 @@ region = Rect2(0, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
 atlas = ExtResource("2_sweqy")
 region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urp6f"]
+atlas = ExtResource("2_sweqy")
+region = Rect2(96, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
 atlas = ExtResource("2_sweqy")
@@ -40,12 +45,25 @@ region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sweqy"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"dashL",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"dashR",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2hs0m")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1jxqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urp6f")
 }],
 "loop": true,
 "name": &"idle",
@@ -91,10 +109,13 @@ height = 32.0
 [node name="Player" type="CharacterBody2D" unique_id=1733925489]
 script = ExtResource("1_onrkg")
 
+[node name="ShotEndlag" type="Timer" parent="." unique_id=352838634]
+wait_time = 0.5
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1692457695]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_sweqy")
-animation = &"jump2"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Shooter" type="Marker2D" parent="AnimatedSprite2D" unique_id=1927466382]
@@ -113,3 +134,6 @@ shape = SubResource("CapsuleShape2D_hqtel")
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1857952113]
 stream = ExtResource("5_sweqy")
 volume_db = -5.0
+
+[node name="DashSound" type="AudioStreamPlayer2D" parent="." unique_id=494685354]
+stream = ExtResource("6_2hs0m")

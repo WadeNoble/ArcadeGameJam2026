@@ -1,8 +1,10 @@
 extends Marker2D
 #Handles the "shooting" function of the player character.
 
-const SHOT_VELOCITY = 700
+const SHOT_VELOCITY = 700 
 const SHOT_SCENE = preload("res://shot.tscn")
+const DASH_SCENE = preload("res://dash.tscn")
+
 @onready var shooting_sfx: AudioStreamPlayer2D = $Shooting
 @onready var delay_timer: Timer = $Cooldown
 
@@ -19,3 +21,12 @@ func shoot(direction: float = 1.0) -> bool:
 	shooting_sfx.play()
 	delay_timer.start()
 	return true
+	
+func dash(direction: float = 1.0) -> bool:
+	var dash := SHOT_SCENE.instantiate()
+	dash.global_position = Vector2(global_position.x, global_position.y - 8)
+	
+	dash.set_as_top_level(true)
+	add_child(dash)
+	return true
+	

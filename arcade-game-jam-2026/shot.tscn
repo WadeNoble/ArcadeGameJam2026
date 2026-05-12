@@ -19,6 +19,7 @@ fill_to = Vector2(0.5, 0.01)
 radius = 8.0
 
 [node name="Shot" type="RigidBody2D" unique_id=98912531]
+gravity_scale = 0.0
 script = ExtResource("1_3ldfn")
 
 [node name="Orb" type="Sprite2D" parent="." unique_id=1738362931]
