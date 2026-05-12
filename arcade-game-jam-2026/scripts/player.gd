@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var label: Label = $Label
 @onready var fall_out: StaticBody2D = $"../../../Camera/FallOut"
 @onready var fall_box: CollisionShape2D = $"../../../Camera/FallOut/FallBox"
-@onready var ray_cast_2d: RayCast2D = $RayCast2D
+#@onready var ray_cast_2d: RayCast2D = $RayCast2D
 
 
 signal eggs_collected()
@@ -43,10 +43,12 @@ func _physics_process(delta: float) -> void:
 			coyote_timer.stop()
 		has_coyote_time = true
 		
-	if Input.is_action_just_pressed("Down"):
-		ray_cast_2d.enabled = true
-		if ray_cast_2d.is_colliding() == true:
-			position.y += 2
+	if Input.is_action_pressed("Down") and is_on_floor():
+		#ray_cast_2d.enabled = true
+		#if ray_cast_2d.is_colliding() == true:
+			position.y += 3
+	#else:
+		#ray_cast_2d.enabled = false
 		
 	if Input.is_action_just_pressed("Jump"):
 		try_jump()

@@ -123,7 +123,7 @@ script = ExtResource("4_sweqy")
 
 [node name="KickSound" type="AudioStreamPlayer2D" parent="AnimatedSprite2D/Shooter" unique_id=870307796]
 stream = ExtResource("4_2hs0m")
-volume_db = -5.0
+volume_db = -12.0
 
 [node name="Cooldown" type="Timer" parent="AnimatedSprite2D/Shooter" unique_id=877374868]
 wait_time = 0.25
@@ -136,6 +136,7 @@ script = ExtResource("6_1jxqw")
 
 [node name="DashSound" type="AudioStreamPlayer2D" parent="AnimatedSprite2D/Dasher" unique_id=494685354]
 stream = ExtResource("6_2hs0m")
+volume_db = -3.0
 max_polyphony = 2
 
 [node name="DashCooldown" type="Timer" parent="AnimatedSprite2D/Dasher" unique_id=1098091075]
@@ -162,12 +163,5 @@ offset_right = 16.0
 offset_bottom = -4.0
 text = "   ZERO"
 label_settings = SubResource("LabelSettings_dw050")
-
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1383323822]
-position = Vector2(0, 16)
-enabled = false
-target_position = Vector2(0, 5)
-collision_mask = 64
-hit_from_inside = true
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="freefall"]
