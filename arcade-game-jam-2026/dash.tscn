@@ -24,7 +24,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_woyos")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_i047b")
 }],
 "loop": true,
@@ -36,15 +36,16 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="DashEffect" type="RigidBody2D" unique_id=2082273610]
-collision_layer = 0
-collision_mask = 26
+collision_layer = 4
+collision_mask = 8
 gravity_scale = 0.0
 script = ExtResource("1_tkrbt")
 
 [node name="Plume" type="AnimatedSprite2D" parent="." unique_id=361502892]
 sprite_frames = SubResource("SpriteFrames_f1w7f")
 animation = &"boom"
-frame_progress = 0.09134615
+autoplay = "boom"
+frame_progress = 0.31410587
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2012836757]
 shape = SubResource("RectangleShape2D_7qctt")

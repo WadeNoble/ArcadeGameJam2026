@@ -11,14 +11,19 @@ config_version=5
 [application]
 
 config/name="Arcade Game Jam 2026"
+config/description="Are you a bad enough dude to survive THE SCRAMBLE?"
+config/version="0.0.2"
 run/main_scene="uid://b7t7gxnlcsx3q"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://assets/images/icon.svg"
+boot_splash/bg_color=Color(0.014275229, 0.0142752165, 0.014275211, 1)
+boot_splash/image="uid://c2md0ubtqph85"
+config/icon="uid://c2md0ubtqph85"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
+window/size/mode=4
 window/size/resizable=false
 window/size/borderless=true
 window/stretch/mode="viewport"
@@ -88,6 +93,16 @@ Down={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":1,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="ground"
+2d_physics/layer_3="player_projectiles"
+2d_physics/layer_4="enemies"
+2d_physics/layer_5="pickups"
+2d_physics/layer_6="airborne_enemies"
+2d_physics/layer_8="screen boundaries"
 
 [physics]
 
