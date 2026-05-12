@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bsvvbcoe14m6g" path="res://scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://l1jljggq8wps" path="res://assets/images/player/playertestv3.png" id="2_sweqy"]
-[ext_resource type="AudioStream" uid="uid://cusju2nhpfw7w" path="res://assets/sfx/placeholderlaser.wav" id="4_2hs0m"]
+[ext_resource type="AudioStream" uid="uid://cdlvrr53cxdji" path="res://assets/sfx/placeholderkick.wav" id="4_2hs0m"]
 [ext_resource type="Script" uid="uid://djuisegy3uin3" path="res://scripts/shooter.gd" id="4_sweqy"]
 [ext_resource type="AudioStream" uid="uid://c13f755mk8486" path="res://assets/sfx/placeholderjump.wav" id="5_sweqy"]
 [ext_resource type="AudioStream" uid="uid://ds64jpqddj5jo" path="res://assets/sfx/placeholderbang.wav" id="6_2hs0m"]
@@ -87,6 +87,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hqtel"]
+radius = 11.125
 height = 32.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1733925489]
@@ -94,6 +95,8 @@ script = ExtResource("1_onrkg")
 
 [node name="ShotEndlag" type="Timer" parent="." unique_id=352838634]
 wait_time = 0.5
+one_shot = true
+autostart = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1692457695]
 texture_filter = 1
@@ -104,11 +107,17 @@ autoplay = "idle"
 [node name="Shooter" type="Marker2D" parent="AnimatedSprite2D" unique_id=1927466382]
 script = ExtResource("4_sweqy")
 
-[node name="Shooting" type="AudioStreamPlayer2D" parent="AnimatedSprite2D/Shooter" unique_id=870307796]
+[node name="KickSound" type="AudioStreamPlayer2D" parent="AnimatedSprite2D/Shooter" unique_id=870307796]
 stream = ExtResource("4_2hs0m")
+volume_db = -5.0
+
+[node name="DashSound" type="AudioStreamPlayer2D" parent="AnimatedSprite2D/Shooter" unique_id=494685354]
+stream = ExtResource("6_2hs0m")
 
 [node name="Cooldown" type="Timer" parent="AnimatedSprite2D/Shooter" unique_id=877374868]
-wait_time = 0.25
+wait_time = 0.33
+one_shot = true
+autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1350459932]
 position = Vector2(-0.125, 0)
@@ -117,6 +126,3 @@ shape = SubResource("CapsuleShape2D_hqtel")
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1857952113]
 stream = ExtResource("5_sweqy")
 volume_db = -5.0
-
-[node name="DashSound" type="AudioStreamPlayer2D" parent="." unique_id=494685354]
-stream = ExtResource("6_2hs0m")

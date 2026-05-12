@@ -2,7 +2,6 @@ extends CharacterBody2D
 @onready var shot_endlag: Timer = $ShotEndlag
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
-@onready var dash_sound: AudioStreamPlayer2D = $DashSound
 @onready var shooter: Marker2D = $AnimatedSprite2D/Shooter
 
 signal eggs_collected()
@@ -66,9 +65,9 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.flip_h = true
 
 	var is_shooting := false
-	if Input.is_action_just_pressed("Shoot Left"):
+	if Input.is_action_pressed("Shoot Left"):
 		is_shooting = shooter.shoot(-1)
-	elif Input.is_action_just_pressed("Shoot Right"):
+	elif Input.is_action_pressed("Shoot Right"):
 		is_shooting = shooter.shoot(1)
 		
 	if shot_endlag.is_stopped():
@@ -106,10 +105,11 @@ func try_airdash():
 		airdashing = true
 		if Input.is_action_pressed("Dash Down Left"):
 			velocity.x = -BOOST_SPEED
+			shooter.dash(-1)
 		elif Input.is_action_pressed("Dash Down Right"):
 			velocity.x = BOOST_SPEED
+			shooter.dash(1)
 	else:
 		return
 	if not is_on_floor():
 			velocity.y = FASTFALL_SPEED
-	dash_sound.play()
