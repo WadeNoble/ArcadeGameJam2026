@@ -2,7 +2,6 @@ extends Marker2D
 #Handles the "shooting" function of the player character.
 
 const SHOT_VELOCITY = 700 
-
 const SHOT_SCENE = preload("res://shot.tscn")
 
 @onready var kick_sound: AudioStreamPlayer2D = $KickSound

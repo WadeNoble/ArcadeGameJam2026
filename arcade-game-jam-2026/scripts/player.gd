@@ -5,7 +5,10 @@ extends CharacterBody2D
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 @onready var shooter: Marker2D = $AnimatedSprite2D/Shooter
 @onready var dasher: Marker2D = $AnimatedSprite2D/Dasher
+@onready var duster: Marker2D = $AnimatedSprite2D/Duster
 @onready var label: Label = $Label
+@onready var fall_out: StaticBody2D = $"../../../Camera/FallOut"
+@onready var fall_box: CollisionShape2D = $"../../../Camera/FallOut/FallBox"
 
 
 signal eggs_collected()
@@ -23,12 +26,16 @@ var has_double_jump := false
 var has_airdash := false
 var airdashing := false
 var has_coyote_time := false
+var hard_landing := false
 
 
 func _physics_process(delta: float) -> void:
 	# Handle jumping. Recharge double jump if grounded
 	label.text = str(coyote_timer.time_left)
 	if is_on_floor():
+		if hard_landing:
+			duster.dust()
+			hard_landing = false
 		has_double_jump = true
 		has_airdash = true
 		airdashing = false
@@ -50,17 +57,22 @@ func _physics_process(delta: float) -> void:
 				coyote_timer.start()
 			
 		velocity.y = minf(FASTFALL_SPEED, velocity.y + get_gravity().y * delta)
+		if velocity.y == FASTFALL_SPEED:
+			hard_landing = true
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("Move Left", "Move Right")
 	if direction:
+		#if airdash opposite way you're moving
 		if airdashing and (velocity.x/direction == -1):
 			velocity.x = move_toward(velocity.x, direction * WALK_SPEED, FRICTION*delta)
+		#if airdash in direction you're moving
 		elif (velocity.x * direction > WALK_SPEED):
-			velocity.x = move_toward(velocity.x, direction * WALK_SPEED, FRICTION*delta*.25)
+			velocity.x = move_toward(velocity.x, direction * WALK_SPEED, FRICTION*delta*.2)
+		#if have airdash speed and try to move opposite direction/are grounded
 		elif (velocity.x * direction < -WALK_SPEED):
-			velocity.x = move_toward(velocity.x, direction * WALK_SPEED, FRICTION*delta*6)
+			velocity.x = move_toward(velocity.x, direction * WALK_SPEED, FRICTION*delta*5)
 		else:
 			velocity.x = direction * WALK_SPEED
 	else:
@@ -86,6 +98,9 @@ func _physics_process(delta: float) -> void:
 	if shot_endlag.is_stopped():
 		if is_shooting:
 			shot_endlag.start()
+			
+#func _on_body_entered(body: Node) -> void:
+	#die()
 	
 func get_new_animation():
 	if is_on_floor():

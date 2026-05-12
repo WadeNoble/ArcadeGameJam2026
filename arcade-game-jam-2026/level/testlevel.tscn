@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b1mqfxwbljxj3" path="res://assets/images/player/bgtest.png" id="2_srhd0"]
 [ext_resource type="PackedScene" uid="uid://drj3b6ormgaud" path="res://player.tscn" id="2_v6f5v"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0acls"]
+size = Vector2(800, 32)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srhd0"]
 size = Vector2(32, 360)
 
@@ -1128,10 +1131,17 @@ limit_left = 0
 drag_horizontal_enabled = true
 script = ExtResource("1_srhd0")
 
+[node name="FallOut" type="StaticBody2D" parent="Camera" unique_id=1909719143]
+position = Vector2(-10, 196)
+collision_layer = 0
+
+[node name="FallBox" type="CollisionShape2D" parent="Camera/FallOut" unique_id=2121315592]
+shape = SubResource("RectangleShape2D_0acls")
+debug_color = Color(0, 1, 0.69803923, 0.41960785)
+
 [node name="Boundary" type="StaticBody2D" parent="." unique_id=163331950]
 position = Vector2(310, 180)
 collision_layer = 128
-constant_linear_velocity = Vector2(500, 0)
 script = ExtResource("2_0acls")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary" unique_id=1678693973]

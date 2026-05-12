@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://c13f755mk8486" path="res://assets/sfx/placeholderjump.wav" id="5_sweqy"]
 [ext_resource type="Script" uid="uid://c1yg0ayfqly65" path="res://scripts/dasher.gd" id="6_1jxqw"]
 [ext_resource type="AudioStream" uid="uid://ds64jpqddj5jo" path="res://assets/sfx/placeholderbang.wav" id="6_2hs0m"]
+[ext_resource type="Script" uid="uid://dpvpfad1ngbo7" path="res://scripts/duster.gd" id="7_dw050"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
 atlas = ExtResource("2_sweqy")
@@ -125,16 +126,26 @@ stream = ExtResource("4_2hs0m")
 volume_db = -5.0
 
 [node name="Cooldown" type="Timer" parent="AnimatedSprite2D/Shooter" unique_id=877374868]
-wait_time = 0.33
+wait_time = 0.25
 one_shot = true
 autostart = true
 
 [node name="Dasher" type="Marker2D" parent="AnimatedSprite2D" unique_id=549200940]
-position = Vector2(0, -15)
+position = Vector2(0, -16)
 script = ExtResource("6_1jxqw")
 
 [node name="DashSound" type="AudioStreamPlayer2D" parent="AnimatedSprite2D/Dasher" unique_id=494685354]
 stream = ExtResource("6_2hs0m")
+max_polyphony = 2
+
+[node name="DashCooldown" type="Timer" parent="AnimatedSprite2D/Dasher" unique_id=1098091075]
+wait_time = 0.15
+one_shot = true
+autostart = true
+
+[node name="Duster" type="Marker2D" parent="AnimatedSprite2D" unique_id=407869795]
+position = Vector2(0, 10)
+script = ExtResource("7_dw050")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1350459932]
 shape = SubResource("CapsuleShape2D_2hs0m")
