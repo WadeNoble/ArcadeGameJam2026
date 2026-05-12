@@ -88,9 +88,8 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2hs0m"]
-radius = 11.0
-height = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dw050"]
+size = Vector2(20, 30)
 
 [sub_resource type="SystemFont" id="SystemFont_1jxqw"]
 
@@ -99,7 +98,8 @@ font = SubResource("SystemFont_1jxqw")
 font_size = 8
 
 [node name="Player" type="CharacterBody2D" unique_id=1733925489]
-collision_mask = 154
+collision_mask = 218
+floor_max_angle = 1.3089969
 script = ExtResource("1_onrkg")
 
 [node name="ShotEndlag" type="Timer" parent="." unique_id=352838634]
@@ -148,7 +148,8 @@ position = Vector2(0, 10)
 script = ExtResource("7_dw050")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1350459932]
-shape = SubResource("CapsuleShape2D_2hs0m")
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_dw050")
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1857952113]
 stream = ExtResource("5_sweqy")
@@ -161,5 +162,12 @@ offset_right = 16.0
 offset_bottom = -4.0
 text = "   ZERO"
 label_settings = SubResource("LabelSettings_dw050")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1383323822]
+position = Vector2(0, 16)
+enabled = false
+target_position = Vector2(0, 5)
+collision_mask = 64
+hit_from_inside = true
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="freefall"]

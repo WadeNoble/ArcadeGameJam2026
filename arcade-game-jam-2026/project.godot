@@ -102,6 +102,7 @@ Down={
 2d_physics/layer_4="enemies"
 2d_physics/layer_5="pickups"
 2d_physics/layer_6="airborne_enemies"
+2d_physics/layer_7="platforms"
 2d_physics/layer_8="screen boundaries"
 
 [physics]
