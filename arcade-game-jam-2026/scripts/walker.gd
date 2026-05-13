@@ -6,7 +6,7 @@ var direction = -1
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 
-var is_alive = true
+#var is_alive = true
 
 func _ready():
 	add_to_group("Enemy")
@@ -29,9 +29,16 @@ func update_animation():
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_projectiles"):
-		is_alive = false
+		#is_alive = false
 		queue_free()
 	
 func turn():
 	direction = -direction
 	scale.x = scale.x * -1
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	show()
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()

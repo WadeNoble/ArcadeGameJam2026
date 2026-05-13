@@ -5,19 +5,21 @@ extends CharacterBody2D
 @onready var death_timer: Timer = $DeathTimer
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
+@onready var eat_sound: AudioStreamPlayer2D = $EatSound
+@onready var hit_sound: AudioStreamPlayer2D = $HitSound
 @onready var shooter: Marker2D = $AnimatedSprite2D/Shooter
 @onready var dasher: Marker2D = $AnimatedSprite2D/Dasher
 @onready var duster: Marker2D = $AnimatedSprite2D/Duster
 @onready var label: Label = $Label
-@onready var fall_out: StaticBody2D = $"../Camera/FallOut"
-@onready var fall_box: CollisionShape2D = $"../Camera/FallOut/FallBox"
+@onready var hurtbox_shape: CollisionShape2D = $Hurtbox/HurtboxShape
 #@onready var ray_cast_2d: RayCast2D = $RayCast2D
 
-var screen_size
+#var screen_size
 
 signal eggs_collected()
 signal egg_collected()
 signal died()
+signal game_over()
 
 const WALK_SPEED := 150.0
 const BOOST_SPEED := 400.0
@@ -33,13 +35,24 @@ var airdashing := false
 var has_coyote_time := false
 var hard_landing := false
 var is_dying := false
+var lives := 3
 
-func _ready():
-	screen_size = get_viewport_rect().size
+#func _ready():
+#	screen_size = get_viewport_rect().size
 
 func _physics_process(delta: float) -> void:
 	# Handle jumping. Recharge double jump if grounded
-	#label.text = str(lives)
+	label.text = str(lives)
+	#if lives == 0:
+		#game_over
+	label.text = str(lives) + " " + str(int(death_timer.time_left))
+	if death_timer.time_left != 0:
+		label.text = str(lives) + " " + str(int(death_timer.time_left))
+	elif is_dying == true:
+		is_dying = false
+		jump_sound.play()
+		hurtbox_shape.set_deferred("disabled", false)
+		
 	if is_on_floor():
 		if hard_landing:
 			duster.dust()
@@ -115,7 +128,8 @@ func _physics_process(delta: float) -> void:
 		if is_shooting:
 			shot_endlag.start()
 	
-	position = position.clamp(Vector2.ZERO, screen_size)	
+	
+	#global_position = global_position.clamp(Vector2.ZERO, screen_size)	
 	
 #func _on_body_entered(body: Node) -> void:
 	#die()
@@ -175,3 +189,26 @@ func die():
 	await death_timer
 		
 	#lives -= lives
+
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	lives = lives - 1
+	hit_sound.pitch_scale = 1
+	hit_sound.play()#change to a death sound
+	death_timer.start()
+	is_dying = true
+	died.emit()
+	hurtbox_shape.set_deferred("disabled", true)
+	position.y = 0
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	lives = lives - 1
+	hit_sound.pitch_scale = 2
+	hit_sound.play()#change to fallout sound
+	death_timer.start()
+	is_dying = true
+	died.emit()
+	hurtbox_shape.set_deferred("disabled", true)
+	position.y = 0
+	

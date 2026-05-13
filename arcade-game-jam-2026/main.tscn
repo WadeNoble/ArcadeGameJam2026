@@ -6,6 +6,7 @@
 
 [node name="MainGame" type="Node" unique_id=187935485]
 script = ExtResource("1_0xm2m")
+level_scene = ExtResource("1_ig7tw")
 
 [node name="World" type="Node2D" parent="." unique_id=1337486575]
 
@@ -57,6 +58,19 @@ horizontal_alignment = 1
 [node name="IdleTimeout" type="Timer" parent="." unique_id=411288496]
 wait_time = 180.0
 autostart = true
+
+[node name="TestLabel" type="Label" parent="." unique_id=478140845]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pause_pressed" from="." to="PauseCanvasLayer" method="_on_pause_button_pressed"]
 [connection signal="timeout" from="IdleTimeout" to="." method="ggs"]

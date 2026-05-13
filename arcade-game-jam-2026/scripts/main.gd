@@ -1,10 +1,16 @@
 extends Node
+
+@export var level_scene: PackedScene
+
 @onready var idle_timeout: Timer = $IdleTimeout
 
 signal pause_pressed
 
-var score = 0
-var player_lives = 3
+var score := 0
+var player_lives := 3
+
+func _ready():
+	$TestLabel.text = "Begin!"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -21,6 +27,7 @@ func _process(_delta: float) -> void:
 		idle_timeout.start()
 		#show credits at 10 seconds left
 		
+
 func ggs():
 	get_tree().quit()
 	
