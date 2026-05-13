@@ -5,7 +5,7 @@
 
 [sub_resource type="Gradient" id="Gradient_f4qg3"]
 offsets = PackedFloat32Array(0.0022222223, 1)
-colors = PackedColorArray(0, 0.78431374, 0.78431374, 1, 0, 0, 0, 0)
+colors = PackedColorArray(0, 1, 0.13725491, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_w34ps"]
 gradient = SubResource("Gradient_f4qg3")
@@ -20,9 +20,10 @@ size = Vector2(16, 16)
 
 [node name="Shot" type="RigidBody2D" unique_id=98912531 groups=["player_projectiles"]]
 collision_layer = 0
-collision_mask = 40
+collision_mask = 288
 gravity_scale = 0.0
 script = ExtResource("1_3ldfn")
+metadata/_edit_group_ = true
 
 [node name="Foot" type="Sprite2D" parent="." unique_id=1738362931]
 scale = Vector2(1.5, 1.5)

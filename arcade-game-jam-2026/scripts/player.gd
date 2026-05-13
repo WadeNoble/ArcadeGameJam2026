@@ -1,4 +1,5 @@
 extends CharacterBody2D
+
 @onready var shot_endlag: Timer = $ShotEndlag
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var death_timer: Timer = $DeathTimer
@@ -8,10 +9,11 @@ extends CharacterBody2D
 @onready var dasher: Marker2D = $AnimatedSprite2D/Dasher
 @onready var duster: Marker2D = $AnimatedSprite2D/Duster
 @onready var label: Label = $Label
-@onready var fall_out: StaticBody2D = $"../../../Camera/FallOut"
-@onready var fall_box: CollisionShape2D = $"../../../Camera/FallOut/FallBox"
+@onready var fall_out: StaticBody2D = $"../Camera/FallOut"
+@onready var fall_box: CollisionShape2D = $"../Camera/FallOut/FallBox"
 #@onready var ray_cast_2d: RayCast2D = $RayCast2D
 
+var screen_size
 
 signal eggs_collected()
 signal egg_collected()
@@ -24,13 +26,16 @@ const JUMP_VELOCITY := -300.0
 const FASTFALL_SPEED := 300
 const DECELERATION := 50
 
-var current_speed := 0
+#var current_speed := 0
 var has_double_jump := false
 var has_airdash := false
 var airdashing := false
 var has_coyote_time := false
 var hard_landing := false
 var is_dying := false
+
+func _ready():
+	screen_size = get_viewport_rect().size
 
 func _physics_process(delta: float) -> void:
 	# Handle jumping. Recharge double jump if grounded
@@ -109,7 +114,9 @@ func _physics_process(delta: float) -> void:
 	if shot_endlag.is_stopped():
 		if is_shooting:
 			shot_endlag.start()
-			
+	
+	position = position.clamp(Vector2.ZERO, screen_size)	
+	
 #func _on_body_entered(body: Node) -> void:
 	#die()
 	

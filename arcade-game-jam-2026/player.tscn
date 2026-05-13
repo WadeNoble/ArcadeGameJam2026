@@ -101,6 +101,7 @@ outline_size = 2
 collision_mask = 218
 floor_max_angle = 1.3089969
 script = ExtResource("1_onrkg")
+metadata/_edit_group_ = true
 
 [node name="ShotEndlag" type="Timer" parent="." unique_id=352838634]
 wait_time = 0.5
