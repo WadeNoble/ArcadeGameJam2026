@@ -37,8 +37,8 @@ var hard_landing := false
 var is_dying := false
 var lives := 3
 
-#func _ready():
-#	screen_size = get_viewport_rect().size
+func _ready():
+	lives = lives
 
 func _physics_process(delta: float) -> void:
 	# Handle jumping. Recharge double jump if grounded
@@ -192,7 +192,7 @@ func die():
 
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	lives = lives - 1
+	lives -= 1
 	hit_sound.pitch_scale = 1
 	hit_sound.play()#change to a death sound
 	death_timer.start()
@@ -200,10 +200,11 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 	died.emit()
 	hurtbox_shape.set_deferred("disabled", true)
 	position.y = 0
+	body.explode()
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	lives = lives - 1
+	lives -= 1
 	hit_sound.pitch_scale = 2
 	hit_sound.play()#change to fallout sound
 	death_timer.start()

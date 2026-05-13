@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b1uy3dbexetee" path="res://assets/images/player/explodetest.png" id="1_q7epf"]
 [ext_resource type="Script" uid="uid://dr86ym7qi7yso" path="res://scripts/explosion.gd" id="2_vxas0"]
+[ext_resource type="AudioStream" uid="uid://b02pk3heqjmbs" path="res://assets/sfx/placeholderunf.wav" id="3_j4sxf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vxas0"]
 atlas = ExtResource("1_q7epf")
@@ -15,10 +16,14 @@ region = Rect2(32, 0, 32, 32)
 atlas = ExtResource("1_q7epf")
 region = Rect2(64, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmxf7"]
+atlas = ExtResource("1_q7epf")
+region = Rect2(96, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_kmxf7"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": SubResource("AtlasTexture_vxas0")
 }, {
 "duration": 1.0,
@@ -26,14 +31,22 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_m5xho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmxf7")
 }],
-"loop": true,
+"loop": false,
 "name": &"bang",
-"speed": 6.0
+"speed": 12.0
 }]
 
 [node name="Explosion" type="AnimatedSprite2D" unique_id=1097384762]
 sprite_frames = SubResource("SpriteFrames_kmxf7")
 animation = &"bang"
 autoplay = "bang"
+frame = 3
+frame_progress = 1.0
 script = ExtResource("2_vxas0")
+
+[node name="BangSound" type="AudioStreamPlayer2D" parent="." unique_id=343996001]
+stream = ExtResource("3_j4sxf")

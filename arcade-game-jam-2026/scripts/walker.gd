@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+const EXPLOSION = preload("res://explosion.tscn")
 
 var speed = 100
 var direction = -1
@@ -30,7 +31,8 @@ func update_animation():
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_projectiles"):
 		#is_alive = false
-		queue_free()
+		body.queue_free()
+		explode()
 	
 func turn():
 	direction = -direction
@@ -41,4 +43,10 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	show()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	queue_free()
+	
+func explode():
+	var splode := EXPLOSION.instantiate()
+	splode.global_position = global_position
+	add_sibling(splode)
 	queue_free()

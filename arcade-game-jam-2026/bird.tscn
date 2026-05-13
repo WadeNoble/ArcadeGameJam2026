@@ -93,7 +93,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crnqq"]
 size = Vector2(26.5, 28)
 
-[node name="MovingBird" type="Node2D" unique_id=6820801]
+[node name="MovingBird" type="Node2D" unique_id=6820801 groups=["enemies"]]
 script = ExtResource("1_crnqq")
 
 [node name="Bird" type="RigidBody2D" parent="." unique_id=47000230]

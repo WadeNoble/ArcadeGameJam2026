@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://ds64jpqddj5jo" path="res://assets/sfx/placeholderbang.wav" id="6_2hs0m"]
 [ext_resource type="Script" uid="uid://dpvpfad1ngbo7" path="res://scripts/duster.gd" id="7_dw050"]
 [ext_resource type="AudioStream" uid="uid://bq68mhvhnpqa1" path="res://assets/sfx/placeholdereat.wav" id="9_b26j0"]
+[ext_resource type="Texture2D" uid="uid://dwgr8gfncvj8o" path="res://assets/images/player/testlivesbg.png" id="11_nvl01"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
 atlas = ExtResource("2_sweqy")
@@ -188,6 +189,13 @@ collision_mask = 184
 [node name="HurtboxShape" type="CollisionShape2D" parent="Hurtbox" unique_id=1944196357]
 position = Vector2(0, -0.625)
 shape = SubResource("RectangleShape2D_b26j0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=16321611]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer" unique_id=2090767437]
+scale = Vector2(6, 3)
+texture = ExtResource("11_nvl01")
+region_rect = Rect2(0, 0, 144.79996, 106.79999)
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="freefall"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
