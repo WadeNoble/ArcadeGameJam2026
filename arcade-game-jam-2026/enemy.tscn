@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cprtku2lcbhtw" path="res://scripts/walker.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://co43wbxyg2g3w" path="res://assets/images/player/playertest.png" id="2_qi2p4"]
+[ext_resource type="AudioStream" uid="uid://b02pk3heqjmbs" path="res://assets/sfx/placeholderunf.wav" id="3_qi2p4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iifgy"]
 atlas = ExtResource("2_qi2p4")
@@ -62,6 +63,13 @@ collision_mask = 4
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_hb8ge")
 debug_color = Color(0.8723735, 0.3324798, 0.2825508, 0.41960785)
+
+[node name="OofSound" type="AudioStreamPlayer2D" parent="." unique_id=707785984]
+stream = ExtResource("3_qi2p4")
+
+[node name="FlashTimer" type="Timer" parent="." unique_id=1123301694]
+wait_time = 0.05
+one_shot = true
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

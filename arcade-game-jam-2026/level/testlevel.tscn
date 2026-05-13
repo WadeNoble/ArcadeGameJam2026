@@ -90,13 +90,13 @@ tile_set = ExtResource("4_f73ey")
 [node name="Player" parent="." unique_id=1733925489 instance=ExtResource("2_v6f5v")]
 position = Vector2(62, 282)
 
-[node name="MovingBird" parent="." unique_id=6820801 groups=["enemies"] instance=ExtResource("6_f73ey")]
+[node name="MovingBird" parent="." unique_id=6820801 instance=ExtResource("6_f73ey")]
 position = Vector2(817, 161)
 
-[node name="MovingBird2" parent="." unique_id=296040075 groups=["enemies"] instance=ExtResource("6_f73ey")]
+[node name="MovingBird2" parent="." unique_id=296040075 instance=ExtResource("6_f73ey")]
 position = Vector2(844, 257)
 
-[node name="Enemy" parent="." unique_id=1278857248 groups=["enemies"] instance=ExtResource("7_h42ns")]
+[node name="Enemy" parent="." unique_id=1278857248 instance=ExtResource("7_h42ns")]
 position = Vector2(564, 158)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=365531271]

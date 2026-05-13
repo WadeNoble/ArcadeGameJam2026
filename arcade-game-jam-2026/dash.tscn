@@ -38,7 +38,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7qctt"]
 size = Vector2(32, 32)
 
-[node name="DashEffect" type="StaticBody2D" unique_id=2102744291]
+[node name="DashEffect" type="StaticBody2D" unique_id=2102744291 groups=["player_projectiles"]]
 collision_layer = 4
 collision_mask = 256
 script = ExtResource("1_tkrbt")

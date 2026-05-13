@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://2q38du6jog1f" path="res://scripts/bird.gd" id="1_crnqq"]
 [ext_resource type="Texture2D" uid="uid://co43wbxyg2g3w" path="res://assets/images/player/playertest.png" id="1_g5k2s"]
+[ext_resource type="Script" uid="uid://b2t7220x131ao" path="res://scripts/rigidbird.gd" id="2_cchwj"]
 [ext_resource type="AudioStream" uid="uid://b02pk3heqjmbs" path="res://assets/sfx/placeholderunf.wav" id="3_j88tq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_crnqq"]
@@ -93,13 +94,14 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crnqq"]
 size = Vector2(26.5, 28)
 
-[node name="MovingBird" type="Node2D" unique_id=6820801 groups=["enemies"]]
+[node name="MovingBird" type="Node2D" unique_id=6820801]
 script = ExtResource("1_crnqq")
 
-[node name="Bird" type="RigidBody2D" parent="." unique_id=47000230]
+[node name="Bird" type="RigidBody2D" parent="." unique_id=47000230 groups=["enemies"]]
 collision_layer = 32
 collision_mask = 0
 gravity_scale = 0.0
+script = ExtResource("2_cchwj")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Bird" unique_id=832494226]
 enable_node_path = NodePath("../..")
@@ -118,7 +120,7 @@ debug_color = Color(3.6098063e-06, 0.6309543, 0.47098744, 0.41960785)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Bird" unique_id=999312499]
 libraries/ = SubResource("AnimationLibrary_j88tq")
 
-[node name="Hurtbox" type="Area2D" parent="Bird" unique_id=202378795]
+[node name="Hurtbox" type="Area2D" parent="Bird" unique_id=202378795 groups=["enemies"]]
 collision_layer = 256
 collision_mask = 4
 

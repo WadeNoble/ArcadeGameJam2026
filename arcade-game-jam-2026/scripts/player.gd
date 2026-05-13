@@ -179,37 +179,30 @@ func try_airdash():
 			
 func freefall():
 	has_coyote_time = false
-	
-func die():
-	if is_dying:
-		return
-	
-	is_dying = true
-	animated_sprite_2d.play("explode")
-	await death_timer
-		
-	#lives -= lives
-
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	lives -= 1
-	hit_sound.pitch_scale = 1
-	hit_sound.play()#change to a death sound
-	death_timer.start()
-	is_dying = true
-	died.emit()
-	hurtbox_shape.set_deferred("disabled", true)
-	position.y = 0
-	body.explode()
+	if body.is_in_group("enemies"):
+		hit_sound.pitch_scale = 1
+		hit_sound.play() #change to a better death sound
+		die()
+	else:
+		hit_sound.pitch_scale = .4
+		hit_sound.play()
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	lives -= 1
 	hit_sound.pitch_scale = 2
-	hit_sound.play()#change to fallout sound
+	hit_sound.play()#change to fall out sound
+	die()
+	
+func die():
+	lives -= 1
+	if is_dying:
+		return
+	animated_sprite_2d.play("explode")
+	#respawn timer?
 	death_timer.start()
 	is_dying = true
 	died.emit()
 	hurtbox_shape.set_deferred("disabled", true)
 	position.y = 0
-	

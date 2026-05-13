@@ -4,6 +4,8 @@ const EXPLOSION = preload("res://explosion.tscn")
 
 var speed = 100
 var direction = -1
+var health = 2
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var ray_cast_2d: RayCast2D = $RayCast2D
 
@@ -14,6 +16,8 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	#should never leave the platform, but just in case
+	#if $FlashTimer.is_stopped():
+		#show()
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
@@ -30,9 +34,13 @@ func update_animation():
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_projectiles"):
-		#is_alive = false
 		body.queue_free()
-		explode()
+		health -= 1
+		
+		$OofSound.play()
+		#$FlashTimer.start() - want visual logic for reduced health - could just make new sprite
+		if health <= 0:
+			explode()
 	
 func turn():
 	direction = -direction

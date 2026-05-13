@@ -2,7 +2,6 @@ extends Node2D
 
 const EXPLOSION = preload("res://explosion.tscn")
 
-
 @onready var animation_player: AnimationPlayer = $Bird/AnimationPlayer
 @onready var animated_sprite_2d: AnimatedSprite2D = $Bird/AnimatedSprite2D
 @onready var visible_on_screen_enabler_2d: VisibleOnScreenEnabler2D = $Bird/VisibleOnScreenEnabler2D
