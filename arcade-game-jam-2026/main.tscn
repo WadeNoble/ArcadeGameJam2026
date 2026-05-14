@@ -4,6 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://dmd0dly7clgeg" path="res://level/testlevel.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://k5s14lnr45wy" path="res://scripts/pause.gd" id="3_h2yge"]
 
+[sub_resource type="SystemFont" id="SystemFont_h2yge"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1bvp3"]
+font = SubResource("SystemFont_h2yge")
+font_size = 64
+font_color = Color(1, 0, 0, 1)
+
 [node name="MainGame" type="Node" unique_id=187935485]
 script = ExtResource("1_0xm2m")
 level_scene = ExtResource("1_ig7tw")
@@ -17,7 +24,6 @@ level_scene = ExtResource("1_ig7tw")
 [node name="Entities" type="Node2D" parent="World" unique_id=1864856940]
 
 [node name="HudCanvasLayer" type="CanvasLayer" parent="." unique_id=826517499]
-visible = false
 
 [node name="HudRoot" type="Control" parent="HudCanvasLayer" unique_id=96838891]
 layout_mode = 3
@@ -32,45 +38,29 @@ script = ExtResource("3_h2yge")
 
 [node name="PauseRoot" type="Control" parent="PauseCanvasLayer" unique_id=1559990446]
 process_mode = 2
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
 
-[node name="Label" type="Label" parent="PauseCanvasLayer" unique_id=1639555696]
-process_mode = 2
-visible = false
+[node name="TestLabel" type="Label" parent="PauseCanvasLayer/PauseRoot" unique_id=478140845]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -31.0
-offset_top = -11.166667
-offset_right = 31.0
-offset_bottom = 11.166667
+offset_left = -100.5
+offset_top = -44.66667
+offset_right = 100.5
+offset_bottom = 44.666656
 grow_horizontal = 2
 grow_vertical = 2
 text = "PAUSE"
-horizontal_alignment = 1
+label_settings = SubResource("LabelSettings_1bvp3")
 
 [node name="IdleTimeout" type="Timer" parent="." unique_id=411288496]
 wait_time = 180.0
 autostart = true
 
-[node name="TestLabel" type="Label" parent="." unique_id=478140845]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[connection signal="pause_pressed" from="." to="PauseCanvasLayer" method="_on_pause_button_pressed"]
 [connection signal="timeout" from="IdleTimeout" to="." method="ggs"]

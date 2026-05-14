@@ -19,18 +19,93 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s80rl"]
-size = Vector2(29, 23)
+size = Vector2(30, 28)
+
+[sub_resource type="Animation" id="Animation_s80rl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7piv4"]
+resource_name = "blink"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.047058824), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gtrp8"]
+resource_name = "chill"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gtrp8"]
+_data = {
+&"RESET": SubResource("Animation_s80rl"),
+&"blink": SubResource("Animation_7piv4"),
+&"chill": SubResource("Animation_gtrp8")
+}
 
 [node name="Egg" type="Area2D" unique_id=1230641621 groups=["pickups"]]
 collision_layer = 16
 script = ExtResource("1_60cwx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=236136347]
+scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_60cwx")
 animation = &"egg"
 autoplay = "egg"
 frame_progress = 0.09918709
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=768491739]
-position = Vector2(0.5, 1.5)
 shape = SubResource("RectangleShape2D_s80rl")
+
+[node name="DespawnTimer" type="Timer" parent="." unique_id=899114063]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1861896640]
+libraries/ = SubResource("AnimationLibrary_gtrp8")
+autoplay = &"chill"

@@ -13,12 +13,14 @@ extends CharacterBody2D
 @onready var exploder: Marker2D = $AnimatedSprite2D/Exploder
 @onready var label: Label = $Label
 @onready var hurtbox_shape: CollisionShape2D = $Hurtbox/HurtboxShape
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 #@onready var ray_cast_2d: RayCast2D = $RayCast2D
 
 #var screen_size
 
-signal eggs_collected()
-signal egg_collected()
+#signal eggs_collected()
+#signal egg_collected()
 signal died()
 signal game_over()
 
@@ -36,7 +38,8 @@ var airdashing := false
 var has_coyote_time := false
 var hard_landing := false
 var is_dying := false
-var lives := 3
+var is_eating := false
+var lives := 1
 @export var score := 0
 
 func _ready():
@@ -127,13 +130,15 @@ func _physics_process(delta: float) -> void:
 		if is_shooting:
 			shot_endlag.start()
 	
-	
-	#global_position = global_position.clamp(Vector2.ZERO, screen_size)	
-	
-#func _on_body_entered(body: Node) -> void:
-	#die()
-	
 func get_new_animation():
+	if is_eating == true:
+		animated_sprite_2d.animation = "eat"
+		animated_sprite_2d.play()
+		await animated_sprite_2d.animation_finished
+		is_eating = false
+		animated_sprite_2d.animation = "idle"
+		animated_sprite_2d.play()
+		
 	if is_on_floor():
 		if velocity.x != 0:
 			animated_sprite_2d.animation = "walk"
@@ -188,6 +193,7 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 	else:
 		hit_sound.pitch_scale = .4
 		hit_sound.play()
+		position.x += 200
 		die()
 
 
@@ -200,6 +206,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 func die():
 	lives -= 1
 	if lives <=0:
+		animated_sprite_2d.hide()
 		game_over.emit()
 		#want to ensure the input checking in main is still active, 
 		#even on a game over screen. fix this later
@@ -212,11 +219,25 @@ func die():
 	is_dying = true
 	died.emit()
 	hurtbox_shape.set_deferred("disabled", true)
+	animation_player.play("flash")
 	position.y = 0
 
+func eat():
+	$EatSound.play()
+	is_eating = true
 
 func _on_coinbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("pickups"):
 		score += area.score
-		$EatSound.play()
 		area.queue_free()
+		eat()
+	if area.is_in_group("killplane") and hurtbox_shape.disabled:
+		jump_sound.pitch_scale = 2
+		jump_sound.play()
+		velocity.y = JUMP_VELOCITY * 2
+
+func _on_coinbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("pickups"):
+		score += body.score
+		body.queue_free()
+		eat()

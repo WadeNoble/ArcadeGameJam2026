@@ -6,12 +6,21 @@
 [ext_resource type="AudioStream" uid="uid://t2hcoptxf5id" path="res://assets/sfx/placeholderdie.wav" id="4_n7ghd"]
 [ext_resource type="Script" uid="uid://djuisegy3uin3" path="res://scripts/shooter.gd" id="4_sweqy"]
 [ext_resource type="AudioStream" uid="uid://c13f755mk8486" path="res://assets/sfx/placeholderjump.wav" id="5_sweqy"]
+[ext_resource type="Texture2D" uid="uid://duvf2lavicbhn" path="res://assets/images/player/playereat.png" id="5_urp6f"]
 [ext_resource type="Script" uid="uid://c1yg0ayfqly65" path="res://scripts/dasher.gd" id="6_1jxqw"]
 [ext_resource type="AudioStream" uid="uid://ds64jpqddj5jo" path="res://assets/sfx/placeholderbang.wav" id="6_2hs0m"]
 [ext_resource type="Script" uid="uid://dpvpfad1ngbo7" path="res://scripts/duster.gd" id="7_dw050"]
 [ext_resource type="AudioStream" uid="uid://bq68mhvhnpqa1" path="res://assets/sfx/placeholdereat.wav" id="9_b26j0"]
 [ext_resource type="Script" uid="uid://c2y8kfupbbgo2" path="res://scripts/exploder.gd" id="11_ivps1"]
 [ext_resource type="Texture2D" uid="uid://dwgr8gfncvj8o" path="res://assets/images/player/testlivesbg.png" id="11_nvl01"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwjto"]
+atlas = ExtResource("5_urp6f")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_606se"]
+atlas = ExtResource("5_urp6f")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
 atlas = ExtResource("2_sweqy")
@@ -47,6 +56,17 @@ region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sweqy"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwjto")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_606se")
+}],
+"loop": false,
+"name": &"eat",
+"speed": 6.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2hs0m")
@@ -103,12 +123,48 @@ outline_size = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b26j0"]
 size = Vector2(12, 17.25)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ivps1"]
-radius = 16.0
-height = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ivps1"]
+size = Vector2(32, 33)
+
+[sub_resource type="Animation" id="Animation_urp6f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bwjto"]
+resource_name = "flash"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 0.5, 1, 1.5, 2, 2.5333333, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_606se"]
+_data = {
+&"RESET": SubResource("Animation_urp6f"),
+&"flash": SubResource("Animation_bwjto")
+}
 
 [node name="Player" type="CharacterBody2D" unique_id=1733925489]
-collision_mask = 210
+collision_mask = 194
 floor_max_angle = 1.3089969
 script = ExtResource("1_onrkg")
 
@@ -135,13 +191,13 @@ one_shot = true
 autostart = true
 
 [node name="DeathTimer" type="Timer" parent="." unique_id=1624152606]
-wait_time = 5.0
+wait_time = 3.0
 one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1692457695]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_sweqy")
-animation = &"idle"
+animation = &"eat"
 autoplay = "idle"
 
 [node name="Shooter" type="Marker2D" parent="AnimatedSprite2D" unique_id=1927466382]
@@ -209,12 +265,17 @@ region_rect = Rect2(0, 0, 144.79996, 106.79999)
 
 [node name="Coinbox" type="Area2D" parent="." unique_id=1526114472]
 collision_layer = 0
-collision_mask = 16
+collision_mask = 144
 
 [node name="CoinboxShape" type="CollisionShape2D" parent="Coinbox" unique_id=486365135]
-shape = SubResource("CapsuleShape2D_ivps1")
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_ivps1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=18443870]
+libraries/ = SubResource("AnimationLibrary_606se")
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="freefall"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="area_entered" from="Coinbox" to="." method="_on_coinbox_area_entered"]
+[connection signal="body_entered" from="Coinbox" to="." method="_on_coinbox_body_entered"]

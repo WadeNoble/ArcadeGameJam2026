@@ -16,8 +16,13 @@ config/version="0.0.3"
 run/main_scene="uid://b7t7gxnlcsx3q"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0.014275229, 0.0142752165, 0.014275211, 1)
-boot_splash/image="uid://c2md0ubtqph85"
+boot_splash/image="uid://cnw4r107a8o8d"
 config/icon="uid://c2md0ubtqph85"
+boot_splash/minimum_display_time=500
+
+[autoload]
+
+Fader="*uid://b0fa61aao1ej5"
 
 [display]
 

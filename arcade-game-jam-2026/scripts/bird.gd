@@ -1,6 +1,7 @@
 extends Node2D
 
 const EXPLOSION = preload("res://explosion.tscn")
+const GRAVITY_EGG = preload("res://gravity_egg.tscn")
 
 @onready var animation_player: AnimationPlayer = $Bird/AnimationPlayer
 @onready var animated_sprite_2d: AnimatedSprite2D = $Bird/AnimatedSprite2D
@@ -12,7 +13,7 @@ func _ready() -> void:
 	animated_sprite_2d.play("flap")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
@@ -20,18 +21,23 @@ func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
 	#can try adding non-straight flight patterns - sin() is an option
 	
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
-	queue_free()
+	explode()
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_projectiles"):
 		body.queue_free()
-		explode()
+		hide()
 		
 		
 func explode():
 	var splode := EXPLOSION.instantiate()
 	add_sibling(splode)
-	#need to fix the explosion positioning before submission
 	splode.position = get_child(0).global_position
+	await splode.animation_finished
+	score()
 	queue_free()
 		
+func score():
+	var egg := GRAVITY_EGG.instantiate()
+	egg.global_position = get_child(0).global_position
+	add_sibling(egg)

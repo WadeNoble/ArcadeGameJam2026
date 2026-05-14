@@ -1,8 +1,10 @@
 extends Node2D
 
-@export var seeker_scene: PackedScene
-
 @onready var enemy_spawn_location: PathFollow2D = $Camera/EnemyPath/EnemySpawnLocation
+@export var total_score := 0
+
+func _process(_delta: float) -> void:
+	total_score = $Player.score
 
 func respawn():
 	#dummy function for now
@@ -10,27 +12,15 @@ func respawn():
 	$Player/DeathTimer.start()
 	
 
-
 func _on_player_game_over() -> void:
-	pass # Replace with function body.
-
-func _on_seeker_timer_timeout() -> void:
-	#instantiate a randomly spawning, horizontally flying enemy
-	var seeker = seeker_scene.instantiate()
-	#set spawn location as a spot on EnemyPath
-	enemy_spawn_location.progress_ratio = randf()
-	var seeker_spawn_location = enemy_spawn_location
-	#somewhere on the right side of the screen
-
-	
-	#shoot parallel to path
-	var s_direction = seeker_spawn_location.rotation + PI*.5
-	#add to scene tree
-	add_child(seeker)
-		#set actual position to that of spawn location
-	print(seeker.position)
-	seeker.position = seeker_spawn_location.position
-	print(seeker.position)
+	$"/root/Fader".fade_out()
+	for child in get_children():
+		child.process_mode = PROCESS_MODE_DISABLED
+	await $"/root/Fader/FaderTimer".timeout
+	Fader.fade_in()
+	var end_scene = load("res://main_menu.tscn").instantiate()
+	get_parent().get_parent().add_sibling(end_scene)
+	queue_free()
 	
 #start moving camera/boundaries faster?, increment "difficulty"?
 func _on_difficulty_timer_timeout() -> void:

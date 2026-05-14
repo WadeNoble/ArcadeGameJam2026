@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cfog1nrxeae7w"]
+
+[ext_resource type="Texture2D" uid="uid://c7a555304cltf" path="res://assets/images/testegg_0001.png" id="1_afwxg"]
+[ext_resource type="Script" uid="uid://dc4ywrbxag68f" path="res://scripts/gravity_egg.gd" id="1_onwkl"]
+[ext_resource type="Texture2D" uid="uid://capdmdkdijf3h" path="res://assets/images/testegg_0002.png" id="2_onwkl"]
+[ext_resource type="Texture2D" uid="uid://dtpfdi83ct1d8" path="res://assets/images/eggsplat.png" id="3_rr8fw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ybrny"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_afwxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_onwkl")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_rr8fw")
+}],
+"loop": true,
+"name": &"splat",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wfytc"]
+size = Vector2(30, 23)
+
+[node name="GravityEgg" type="RigidBody2D" unique_id=315669465 groups=["pickups"]]
+collision_layer = 16
+collision_mask = 66
+mass = 0.5
+script = ExtResource("1_onwkl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1953434616]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_ybrny")
+animation = &"splat"
+autoplay = "fall"
+offset = Vector2(0, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1356642380]
+position = Vector2(1, 1.5)
+shape = SubResource("RectangleShape2D_wfytc")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dek0nssedjoj8"
+path="res://.godot/imported/HoliznaCC0 - Where It's Safe.mp3-adba77f9d7e8034cdd2d52df26544942.mp3str"
+
+[deps]
+
+source_file="res://assets/sfx/HoliznaCC0 - Where It's Safe.mp3"
+dest_files=["res://.godot/imported/HoliznaCC0 - Where It's Safe.mp3-adba77f9d7e8034cdd2d52df26544942.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
