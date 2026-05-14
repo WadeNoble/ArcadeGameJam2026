@@ -4,11 +4,11 @@ extends Node2D
 
 @onready var enemy_spawn_location: PathFollow2D = $Camera/EnemyPath/EnemySpawnLocation
 
-	
 func respawn():
+	#dummy function for now
 	$Player.start($SpawnPosition.position)
 	$Player/DeathTimer.start()
-	#dummy function for now
+	
 
 
 func _on_player_game_over() -> void:
@@ -18,13 +18,13 @@ func _on_seeker_timer_timeout() -> void:
 	#instantiate a randomly spawning, horizontally flying enemy
 	var seeker = seeker_scene.instantiate()
 	#set spawn location as a spot on EnemyPath
+	enemy_spawn_location.progress_ratio = randf()
 	var seeker_spawn_location = enemy_spawn_location
 	#somewhere on the right side of the screen
-	seeker_spawn_location.progress_ratio = randf()
 
 	
 	#shoot parallel to path
-	var s_direction = seeker_spawn_location.rotation + PI/2
+	var s_direction = seeker_spawn_location.rotation + PI*.5
 	#add to scene tree
 	add_child(seeker)
 		#set actual position to that of spawn location
