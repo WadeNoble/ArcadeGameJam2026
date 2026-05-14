@@ -36,6 +36,8 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_projectiles"):
 		body.queue_free()
 		health -= 1
+		if body.name == "DashEffect":
+			health -= 1
 		
 		$OofSound.play()
 		#$FlashTimer.start() - want visual logic for reduced health - could just make new sprite

@@ -31,6 +31,6 @@ func _on_seeker_timer_timeout() -> void:
 	add_child(seeker)
 	
 	
-#start moving camera/boundaries, increment "difficulty"
+#start moving camera/boundaries faster?, increment "difficulty"?
 func _on_difficulty_timer_timeout() -> void:
-	modulate = "ffff00"
+	modulate = "ffffaa"

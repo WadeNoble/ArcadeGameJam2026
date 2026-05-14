@@ -1,13 +1,19 @@
 [gd_scene format=3 uid="uid://dxmv284minroa"]
 
 [ext_resource type="Shader" uid="uid://ba8oela4x632b" path="res://scroll.gdshader" id="1_7vrkn"]
+[ext_resource type="Script" uid="uid://cyh7krqp4x65r" path="res://scripts/main_menu.gd" id="1_fu7sn"]
 [ext_resource type="Texture2D" uid="uid://cbd4clyjjmn51" path="res://assets/images/UI/testmenuBG.png" id="2_fu7sn"]
+[ext_resource type="AudioStream" uid="uid://b02pk3heqjmbs" path="res://assets/sfx/placeholderunf.wav" id="4_jix8l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7vrkn"]
 shader = ExtResource("1_7vrkn")
-shader_parameter/scroll_speed = 0.0
+shader_parameter/scroll_speed = 0.1
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_7vrkn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fu7sn"]
+font_size = 64
+font_color = Color(0, 0, 0, 1)
 
 [node name="MainMenu" type="Control" unique_id=1909294033]
 layout_mode = 3
@@ -16,19 +22,38 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_fu7sn")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=665526954]
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 360.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Pattern" type="TextureRect" parent="." unique_id=2085952757]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_7vrkn")
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 360.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_fu7sn")
 stretch_mode = 1
 
@@ -46,3 +71,24 @@ offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_7vrkn")
+
+[node name="Label" type="Label" parent="Menu?" unique_id=564913677]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_right = 40.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU SUCK"
+label_settings = SubResource("LabelSettings_fu7sn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuTheme" type="AudioStreamPlayer2D" parent="." unique_id=618115289]
+stream = ExtResource("4_jix8l")

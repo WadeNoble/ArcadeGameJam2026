@@ -111,6 +111,7 @@ rotation = -3.1415925
 sprite_frames = SubResource("SpriteFrames_cchwj")
 animation = &"flap"
 autoplay = "flap"
+frame_progress = 0.62742597
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bird" unique_id=1337300490]
 position = Vector2(0, 1)

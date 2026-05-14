@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var shooter: Marker2D = $AnimatedSprite2D/Shooter
 @onready var dasher: Marker2D = $AnimatedSprite2D/Dasher
 @onready var duster: Marker2D = $AnimatedSprite2D/Duster
+@onready var exploder: Marker2D = $AnimatedSprite2D/Exploder
 @onready var label: Label = $Label
 @onready var hurtbox_shape: CollisionShape2D = $Hurtbox/HurtboxShape
 #@onready var ray_cast_2d: RayCast2D = $RayCast2D
@@ -185,6 +186,7 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 		hit_sound.pitch_scale = 1
 		hit_sound.play() #change to a better death sound
 		die()
+		body.explode()
 	else:
 		hit_sound.pitch_scale = .4
 		hit_sound.play()
@@ -197,9 +199,14 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	
 func die():
 	lives -= 1
+	if lives <=0:
+		get_tree().change_scene_to_file("res://main.tscn")
+		#want to ensure the input checking in main is still active, 
+		#even on a game over screen. fix this later
+		#need a version of main with the menu in it this moves to explicitly 
 	if is_dying:
 		return
-	animated_sprite_2d.play("explode")
+	exploder.explode()
 	#respawn timer?
 	death_timer.start()
 	is_dying = true

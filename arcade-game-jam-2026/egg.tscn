@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://byu2v0rk7gvay"]
+
+[ext_resource type="Texture2D" uid="uid://c2md0ubtqph85" path="res://assets/images/scrambledegg.png" id="1_6upkn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_60cwx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6upkn")
+}],
+"loop": true,
+"name": &"egg",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s80rl"]
+size = Vector2(29, 23)
+
+[node name="Egg" type="Area2D" unique_id=1230641621]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=236136347]
+sprite_frames = SubResource("SpriteFrames_60cwx")
+animation = &"egg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=768491739]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_s80rl")

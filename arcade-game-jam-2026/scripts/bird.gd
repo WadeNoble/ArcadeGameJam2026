@@ -30,7 +30,7 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 		
 func explode():
 	var splode := EXPLOSION.instantiate()
-	splode.global_position = global_position
 	add_sibling(splode)
+	splode.position = get_child(0).global_position
 	queue_free()
 		

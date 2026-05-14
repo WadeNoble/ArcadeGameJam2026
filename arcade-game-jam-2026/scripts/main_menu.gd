@@ -1,0 +1,8 @@
+extends Control
+
+func _ready() -> void:
+	$MenuTheme.play()
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("Jump"):
+		get_tree().quit()

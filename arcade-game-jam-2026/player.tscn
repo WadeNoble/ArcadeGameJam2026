@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://ds64jpqddj5jo" path="res://assets/sfx/placeholderbang.wav" id="6_2hs0m"]
 [ext_resource type="Script" uid="uid://dpvpfad1ngbo7" path="res://scripts/duster.gd" id="7_dw050"]
 [ext_resource type="AudioStream" uid="uid://bq68mhvhnpqa1" path="res://assets/sfx/placeholdereat.wav" id="9_b26j0"]
+[ext_resource type="Script" uid="uid://c2y8kfupbbgo2" path="res://scripts/exploder.gd" id="11_ivps1"]
 [ext_resource type="Texture2D" uid="uid://dwgr8gfncvj8o" path="res://assets/images/player/testlivesbg.png" id="11_nvl01"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
@@ -151,7 +152,7 @@ one_shot = true
 autostart = true
 
 [node name="Dasher" type="Marker2D" parent="AnimatedSprite2D" unique_id=549200940]
-position = Vector2(0, -23)
+position = Vector2(0, -28)
 script = ExtResource("6_1jxqw")
 metadata/_edit_group_ = true
 
@@ -168,6 +169,9 @@ autostart = true
 [node name="Duster" type="Marker2D" parent="AnimatedSprite2D" unique_id=407869795]
 position = Vector2(0, 10)
 script = ExtResource("7_dw050")
+
+[node name="Exploder" type="Marker2D" parent="AnimatedSprite2D" unique_id=1589928239]
+script = ExtResource("11_ivps1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1350459932]
 position = Vector2(0, 2)
@@ -191,6 +195,7 @@ position = Vector2(0, -0.625)
 shape = SubResource("RectangleShape2D_b26j0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=16321611]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer" unique_id=2090767437]
 scale = Vector2(6, 3)
