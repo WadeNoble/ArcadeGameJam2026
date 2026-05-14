@@ -68,7 +68,7 @@ position = Vector2(62, 282)
 position = Vector2(564, 158)
 
 [node name="MovingBird" parent="." unique_id=6820801 instance=ExtResource("6_f73ey")]
-position = Vector2(817, 161)
+position = Vector2(104, 284)
 
 [node name="MovingBird2" parent="." unique_id=296040075 instance=ExtResource("6_f73ey")]
 position = Vector2(844, 257)
@@ -83,6 +83,7 @@ script = ExtResource("1_srhd0")
 seeker_scene = ExtResource("6_f73ey")
 
 [node name="SeekerTimer" type="Timer" parent="Camera" unique_id=2058482690]
+wait_time = 5.0
 autostart = true
 
 [node name="DifficultyTimer" type="Timer" parent="Camera" unique_id=716691904]

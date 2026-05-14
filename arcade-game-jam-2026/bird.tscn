@@ -47,7 +47,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:collision_mask")
+tracks/1/path = NodePath(".:collision_layer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -75,7 +75,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:collision_mask")
+tracks/1/path = NodePath(".:collision_layer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -98,7 +98,7 @@ size = Vector2(26.5, 28)
 script = ExtResource("1_crnqq")
 
 [node name="Bird" type="RigidBody2D" parent="." unique_id=47000230 groups=["enemies"]]
-collision_layer = 32
+collision_layer = 0
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("2_cchwj")

@@ -85,10 +85,46 @@ tracks/4/keys = {
 "update": 0,
 "values": [null]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Menu/Score:label_settings.font_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Menu/Score:label_settings/font_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Menu/Score:label_settings:font_color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_glbon"]
 resource_name = "appear"
-length = 15.0
+length = 14.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -140,7 +176,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_qe12f"]
 resource_name = "appear_good_score"
-length = 15.0
+length = 14.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -196,15 +232,27 @@ tracks/4/path = NodePath("Menu/Score:theme_override_colors/font_color")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(7, 9, 11, 13, 15),
+"times": PackedFloat32Array(7, 9, 11, 13, 14),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(1.0588765e-06, 0.5657827, 0.8596397, 1), null]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Menu/Score:label_settings:font_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(7, 9, 11, 13, 14),
+"transitions": PackedFloat32Array(7.727496, 1, 1, 1, 1),
+"update": 0,
+"values": [null, Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(0, 0.7176471, 1, 1), Color(0.047058824, 0, 0, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_nlkkf"]
 resource_name = "appear_not_bad"
-length = 15.0
+length = 14.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -372,3 +420,5 @@ autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=668222958]
 libraries/ = SubResource("AnimationLibrary_nlkkf")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

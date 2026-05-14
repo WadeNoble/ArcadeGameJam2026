@@ -39,7 +39,7 @@ var has_coyote_time := false
 var hard_landing := false
 var is_dying := false
 var is_eating := false
-var lives := 1
+@export var lives := 1
 @export var score := 0
 
 func _ready():
