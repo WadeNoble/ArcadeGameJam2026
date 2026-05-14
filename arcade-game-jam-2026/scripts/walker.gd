@@ -35,6 +35,8 @@ func update_animation():
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_projectiles"):
 		body.queue_free()
+		#placeholder color, fix this later
+		animated_sprite_2d.self_modulate = "e67b20"
 		health -= 1
 		if body.name == "DashEffect":
 			health -= 1

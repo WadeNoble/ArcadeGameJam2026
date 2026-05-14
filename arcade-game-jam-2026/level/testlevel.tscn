@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bwvxco5le7i4q" path="res://bird.tscn" id="6_f73ey"]
 [ext_resource type="PackedScene" uid="uid://foo1m63hnjpv" path="res://enemy.tscn" id="7_h42ns"]
 [ext_resource type="AudioStream" uid="uid://bplkdgskuirqv" path="res://assets/sfx/HoliznaCC0 - Crash Landing!.ogg" id="9_fljdl"]
+[ext_resource type="PackedScene" uid="uid://byu2v0rk7gvay" path="res://egg.tscn" id="10_ctdqo"]
 
 [sub_resource type="Curve2D" id="Curve2D_qnfh6"]
 _data = {
@@ -39,6 +40,7 @@ texture = ExtResource("2_srhd0")
 position = Vector2(320, 180)
 limit_left = 0
 limit_top = 0
+limit_right = 4000
 limit_bottom = 360
 editor_draw_limits = true
 script = ExtResource("1_srhd0")
@@ -52,7 +54,7 @@ position = Vector2(640, 32)
 rotation = 1.5707964
 loop = false
 
-[node name="FallOut" type="Area2D" parent="Camera" unique_id=145516204]
+[node name="FallOut" type="Area2D" parent="Camera" unique_id=145516204 groups=["killplane"]]
 position = Vector2(-10, 196)
 collision_layer = 128
 
@@ -99,8 +101,12 @@ position = Vector2(844, 257)
 [node name="Enemy" parent="." unique_id=1278857248 instance=ExtResource("7_h42ns")]
 position = Vector2(564, 158)
 
+[node name="Egg" parent="." unique_id=1230641621 instance=ExtResource("10_ctdqo")]
+position = Vector2(304, 216)
+
 [node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=365531271]
 stream = ExtResource("9_fljdl")
+volume_db = -3.0
 autoplay = true
 
 [node name="SpawnPosition" type="Marker2D" parent="." unique_id=306378604]

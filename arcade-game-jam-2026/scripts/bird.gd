@@ -31,6 +31,7 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 func explode():
 	var splode := EXPLOSION.instantiate()
 	add_sibling(splode)
+	#need to fix the explosion positioning before submission
 	splode.position = get_child(0).global_position
 	queue_free()
 		

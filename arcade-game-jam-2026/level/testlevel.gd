@@ -21,15 +21,16 @@ func _on_seeker_timer_timeout() -> void:
 	var seeker_spawn_location = enemy_spawn_location
 	#somewhere on the right side of the screen
 	seeker_spawn_location.progress_ratio = randf()
+
 	
-	#set actual position to that of spawn location
-	seeker.position = seeker_spawn_location.position
-	print(seeker.position)
 	#shoot parallel to path
 	var s_direction = seeker_spawn_location.rotation + PI/2
 	#add to scene tree
 	add_child(seeker)
-	
+		#set actual position to that of spawn location
+	print(seeker.position)
+	seeker.position = seeker_spawn_location.position
+	print(seeker.position)
 	
 #start moving camera/boundaries faster?, increment "difficulty"?
 func _on_difficulty_timer_timeout() -> void:

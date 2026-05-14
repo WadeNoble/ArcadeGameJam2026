@@ -37,16 +37,14 @@ var has_coyote_time := false
 var hard_landing := false
 var is_dying := false
 var lives := 3
+@export var score := 0
 
 func _ready():
 	lives = lives
 
 func _physics_process(delta: float) -> void:
 	# Handle jumping. Recharge double jump if grounded
-	label.text = str(lives)
-	#if lives == 0:
-		#game_over
-	label.text = str(lives) + " " + str(int(death_timer.time_left))
+	label.text = str(lives) + " " + str(score)
 	if death_timer.time_left != 0:
 		label.text = str(lives) + " " + str(int(death_timer.time_left))
 	elif is_dying == true:
@@ -190,17 +188,19 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 	else:
 		hit_sound.pitch_scale = .4
 		hit_sound.play()
+		die()
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	hit_sound.pitch_scale = 2
-	hit_sound.play()#change to fall out sound
-	die()
+	if area.is_in_group("killplane"):
+		hit_sound.pitch_scale = 2
+		hit_sound.play()#change to fall out sound
+		die()
 	
 func die():
 	lives -= 1
 	if lives <=0:
-		get_tree().change_scene_to_file("res://main.tscn")
+		game_over.emit()
 		#want to ensure the input checking in main is still active, 
 		#even on a game over screen. fix this later
 		#need a version of main with the menu in it this moves to explicitly 
@@ -213,3 +213,10 @@ func die():
 	died.emit()
 	hurtbox_shape.set_deferred("disabled", true)
 	position.y = 0
+
+
+func _on_coinbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("pickups"):
+		score += area.score
+		$EatSound.play()
+		area.queue_free()

@@ -1,26 +1,35 @@
 [gd_scene format=3 uid="uid://byu2v0rk7gvay"]
 
-[ext_resource type="Texture2D" uid="uid://c2md0ubtqph85" path="res://assets/images/scrambledegg.png" id="1_6upkn"]
+[ext_resource type="Script" uid="uid://bunvklms1dae4" path="res://scripts/egg.gd" id="1_60cwx"]
+[ext_resource type="Texture2D" uid="uid://c7a555304cltf" path="res://assets/images/testegg_0001.png" id="2_s80rl"]
+[ext_resource type="Texture2D" uid="uid://capdmdkdijf3h" path="res://assets/images/testegg_0002.png" id="3_7piv4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_60cwx"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_6upkn")
+"texture": ExtResource("2_s80rl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7piv4")
 }],
 "loop": true,
 "name": &"egg",
-"speed": 5.0
+"speed": 3.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s80rl"]
 size = Vector2(29, 23)
 
-[node name="Egg" type="Area2D" unique_id=1230641621]
+[node name="Egg" type="Area2D" unique_id=1230641621 groups=["pickups"]]
+collision_layer = 16
+script = ExtResource("1_60cwx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=236136347]
 sprite_frames = SubResource("SpriteFrames_60cwx")
 animation = &"egg"
+autoplay = "egg"
+frame_progress = 0.09918709
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=768491739]
 position = Vector2(0.5, 1.5)

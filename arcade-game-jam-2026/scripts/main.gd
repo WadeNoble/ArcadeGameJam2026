@@ -3,6 +3,7 @@ extends Node
 @export var level_scene: PackedScene
 
 @onready var idle_timeout: Timer = $IdleTimeout
+@onready var level_root: Node2D = $World/LevelLayer/LevelRoot
 
 signal pause_pressed
 
@@ -26,7 +27,9 @@ func _process(_delta: float) -> void:
 		#print(180 - idle_timeout.time_left)
 		idle_timeout.start()
 		#show credits at 10 seconds left
-		
+
+
+
 
 func ggs():
 	get_tree().quit()
