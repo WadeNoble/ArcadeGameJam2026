@@ -1,6 +1,7 @@
 extends Camera2D
 
 @export var seeker_scene: PackedScene
+const BIRD = preload("res://bird.tscn")
 
 @export var speed := 25
 
@@ -12,11 +13,11 @@ func _process(delta):
 
 func _on_seeker_timer_timeout() -> void:
 	#instantiate a randomly spawning, horizontally flying enemy
-	var seeker = seeker_scene.instantiate()
+	var bird = BIRD.instantiate()
 	#add to scene tree
-	seeker.position = Vector2(position.x + 100,position.y - (180*randf()))
-	print("Seeker Position 1 ", seeker.position)
-	add_child(seeker)
+	bird.position = Vector2(position.x + 100,position.y)# - (180*randf()))
+	print("Seeker Position 1 ", bird.position)
+	add_child(bird)
 		#set actual position to that of spawn location
-	print(seeker.position)
+	print(bird.position)
 	return

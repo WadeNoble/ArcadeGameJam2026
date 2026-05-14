@@ -86,7 +86,7 @@ seeker_scene = ExtResource("6_f73ey")
 autostart = true
 
 [node name="DifficultyTimer" type="Timer" parent="Camera" unique_id=716691904]
-wait_time = 2.0
+wait_time = 15.0
 autostart = true
 
 [node name="SpawnPosition" type="Marker2D" parent="Camera" unique_id=306378604]
