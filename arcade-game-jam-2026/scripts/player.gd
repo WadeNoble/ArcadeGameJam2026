@@ -1,18 +1,28 @@
 extends CharacterBody2D
+
 @onready var shot_endlag: Timer = $ShotEndlag
 @onready var coyote_timer: Timer = $CoyoteTimer
+@onready var death_timer: Timer = $DeathTimer
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
+@onready var eat_sound: AudioStreamPlayer2D = $EatSound
+@onready var hit_sound: AudioStreamPlayer2D = $HitSound
 @onready var shooter: Marker2D = $AnimatedSprite2D/Shooter
 @onready var dasher: Marker2D = $AnimatedSprite2D/Dasher
 @onready var duster: Marker2D = $AnimatedSprite2D/Duster
+@onready var exploder: Marker2D = $AnimatedSprite2D/Exploder
 @onready var label: Label = $Label
-@onready var fall_out: StaticBody2D = $"../../../Camera/FallOut"
-@onready var fall_box: CollisionShape2D = $"../../../Camera/FallOut/FallBox"
+@onready var hurtbox_shape: CollisionShape2D = $Hurtbox/HurtboxShape
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+#@onready var ray_cast_2d: RayCast2D = $RayCast2D
 
-signal eggs_collected()
-signal egg_collected()
+#var screen_size
+
+#signal eggs_collected()
+#signal egg_collected()
+signal died()
+signal game_over()
 
 const WALK_SPEED := 150.0
 const BOOST_SPEED := 400.0
@@ -21,17 +31,30 @@ const JUMP_VELOCITY := -300.0
 const FASTFALL_SPEED := 300
 const DECELERATION := 50
 
-var current_speed := 0
+#var current_speed := 0
 var has_double_jump := false
 var has_airdash := false
 var airdashing := false
 var has_coyote_time := false
 var hard_landing := false
+var is_dying := false
+var is_eating := false
+var lives := 1
+@export var score := 0
 
+func _ready():
+	lives = lives
 
 func _physics_process(delta: float) -> void:
 	# Handle jumping. Recharge double jump if grounded
-	label.text = str(coyote_timer.time_left)
+	label.text = str(lives) + " " + str(score)
+	if death_timer.time_left != 0:
+		label.text = str(lives) + " " + str(int(death_timer.time_left))
+	elif is_dying == true:
+		is_dying = false
+		jump_sound.play()
+		hurtbox_shape.set_deferred("disabled", false)
+		
 	if is_on_floor():
 		if hard_landing:
 			duster.dust()
@@ -42,6 +65,14 @@ func _physics_process(delta: float) -> void:
 		if not coyote_timer.is_stopped():
 			coyote_timer.stop()
 		has_coyote_time = true
+		
+	if Input.is_action_pressed("Down") and is_on_floor():
+		#ray_cast_2d.enabled = true
+		#if ray_cast_2d.is_colliding() == true:
+			position.y += 3
+	#else:
+		#ray_cast_2d.enabled = false
+		
 	if Input.is_action_just_pressed("Jump"):
 		try_jump()
 	elif Input.is_action_just_released("Jump") and velocity.y < 0.0:
@@ -98,11 +129,16 @@ func _physics_process(delta: float) -> void:
 	if shot_endlag.is_stopped():
 		if is_shooting:
 			shot_endlag.start()
-			
-#func _on_body_entered(body: Node) -> void:
-	#die()
 	
 func get_new_animation():
+	if is_eating == true:
+		animated_sprite_2d.animation = "eat"
+		animated_sprite_2d.play()
+		await animated_sprite_2d.animation_finished
+		is_eating = false
+		animated_sprite_2d.animation = "idle"
+		animated_sprite_2d.play()
+		
 	if is_on_floor():
 		if velocity.x != 0:
 			animated_sprite_2d.animation = "walk"
@@ -123,7 +159,7 @@ func try_jump():
 	elif has_double_jump:
 		has_double_jump = false
 		velocity.x *= .9
-		#change this to seperate sound later
+		#change this later
 		jump_sound.pitch_scale = 1.2
 	else:
 		return
@@ -147,3 +183,61 @@ func try_airdash():
 			
 func freefall():
 	has_coyote_time = false
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemies"):
+		hit_sound.pitch_scale = 1
+		hit_sound.play() #change to a better death sound
+		die()
+		body.explode()
+	else:
+		hit_sound.pitch_scale = .4
+		hit_sound.play()
+		position.x += 200
+		die()
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("killplane"):
+		hit_sound.pitch_scale = 2
+		hit_sound.play()#change to fall out sound
+		die()
+	
+func die():
+	lives -= 1
+	if lives <=0:
+		animated_sprite_2d.hide()
+		game_over.emit()
+		#want to ensure the input checking in main is still active, 
+		#even on a game over screen. fix this later
+		#need a version of main with the menu in it this moves to explicitly 
+	if is_dying:
+		return
+	exploder.explode()
+	#respawn timer?
+	death_timer.start()
+	is_dying = true
+	died.emit()
+	hurtbox_shape.set_deferred("disabled", true)
+	animation_player.play("flash")
+	position.y = 0
+
+func eat():
+	$EatSound.play()
+	is_eating = true
+
+func _on_coinbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("pickups"):
+		score += area.score
+		area.queue_free()
+		eat()
+	if area.is_in_group("killplane") and hurtbox_shape.disabled:
+		jump_sound.pitch_scale = 2
+		jump_sound.play()
+		velocity.y = JUMP_VELOCITY * 2
+
+func _on_coinbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("pickups"):
+		score += body.score
+		body.queue_free()
+		eat()

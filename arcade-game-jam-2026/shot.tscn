@@ -5,7 +5,7 @@
 
 [sub_resource type="Gradient" id="Gradient_f4qg3"]
 offsets = PackedFloat32Array(0.0022222223, 1)
-colors = PackedColorArray(0, 0.78431374, 0.78431374, 1, 0, 0, 0, 0)
+colors = PackedColorArray(0, 1, 0.13725491, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_w34ps"]
 gradient = SubResource("Gradient_f4qg3")
@@ -18,25 +18,26 @@ fill_to = Vector2(0.5, 0.01)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ldfn"]
 size = Vector2(16, 16)
 
-[node name="Shot" type="RigidBody2D" unique_id=98912531]
+[node name="Shot" type="RigidBody2D" unique_id=98912531 groups=["player_projectiles"]]
 collision_layer = 4
-collision_mask = 8
+collision_mask = 256
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_3ldfn")
+metadata/_edit_group_ = true
 
 [node name="Foot" type="Sprite2D" parent="." unique_id=1738362931]
-scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_3ldfn")
 
 [node name="Glow" type="Sprite2D" parent="Foot" unique_id=1110670652]
 texture = SubResource("GradientTexture2D_w34ps")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1393014742]
-scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_3ldfn")
 
 [node name="Timer" type="Timer" parent="." unique_id=457567778]
-wait_time = 0.3
+wait_time = 0.25
 one_shot = true
 autostart = true
 

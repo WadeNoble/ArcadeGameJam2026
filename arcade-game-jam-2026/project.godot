@@ -12,12 +12,17 @@ config_version=5
 
 config/name="Arcade Game Jam 2026"
 config/description="Are you a bad enough dude to survive THE SCRAMBLE?"
-config/version="0.0.2"
+config/version="0.0.3"
 run/main_scene="uid://b7t7gxnlcsx3q"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0.014275229, 0.0142752165, 0.014275211, 1)
-boot_splash/image="uid://c2md0ubtqph85"
+boot_splash/image="uid://cnw4r107a8o8d"
 config/icon="uid://c2md0ubtqph85"
+boot_splash/minimum_display_time=500
+
+[autoload]
+
+Fader="*uid://b0fa61aao1ej5"
 
 [display]
 
@@ -26,8 +31,13 @@ window/size/viewport_height=360
 window/size/mode=4
 window/size/resizable=false
 window/size/borderless=true
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+theme/default_font_generate_mipmaps=true
 
 [input]
 
@@ -102,7 +112,9 @@ Down={
 2d_physics/layer_4="enemies"
 2d_physics/layer_5="pickups"
 2d_physics/layer_6="airborne_enemies"
+2d_physics/layer_7="platforms"
 2d_physics/layer_8="screen boundaries"
+2d_physics/layer_9="enemy_hurtboxes"
 
 [physics]
 

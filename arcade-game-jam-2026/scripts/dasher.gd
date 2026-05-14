@@ -12,7 +12,7 @@ func dash(direction: float = 1.0) -> bool:
 	var dashfx := DASH_SCENE.instantiate()
 	if direction == 1:
 		dashfx.get_node("Plume").flip_h = direction
-	dashfx.position.x = position.x - (direction*12)
+	dashfx.position.x = position.x - (direction*24)
 	
 	add_child(dashfx)
 	dash_sound.play()
