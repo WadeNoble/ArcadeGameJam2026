@@ -102,10 +102,13 @@ frame_progress = 0.09918709
 shape = SubResource("RectangleShape2D_s80rl")
 
 [node name="DespawnTimer" type="Timer" parent="." unique_id=899114063]
-wait_time = 5.0
+wait_time = 6.0
 one_shot = true
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1861896640]
 libraries/ = SubResource("AnimationLibrary_gtrp8")
 autoplay = &"chill"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=32349622]
+rect = Rect2(-15, -14, 30, 28)

@@ -11,7 +11,6 @@ extends CharacterBody2D
 @onready var dasher: Marker2D = $AnimatedSprite2D/Dasher
 @onready var duster: Marker2D = $AnimatedSprite2D/Duster
 @onready var exploder: Marker2D = $AnimatedSprite2D/Exploder
-@onready var label: Label = $Label
 @onready var hurtbox_shape: CollisionShape2D = $Hurtbox/HurtboxShape
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -49,12 +48,14 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	# Handle jumping. Recharge double jump if grounded
-	label.text = str(lives) + " " + str(score)
+	#$Label.text = str(lives) + " " + str(score)
 	if death_timer.time_left != 0:
-		label.text = str(lives) + " " + str(int(death_timer.time_left))
+		#$Label.text = str(lives) + " " + str(int(death_timer.time_left))
+		create_tween().tween_property(self,"modulate:a",0.1,1)
+		create_tween().tween_property(self,"modulate:a",1.0,1)
 	elif is_dying == true:
 		is_dying = false
-		jump_sound.play()
+		eat_sound.play()
 		hurtbox_shape.set_deferred("disabled", false)
 		
 	if is_on_floor():
@@ -207,6 +208,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
 		hit_sound.pitch_scale = 1
 		hit_sound.play() #change to a better death sound
+		hurtbox_shape.set_deferred("disabled", true)
 		die()
 		area.get_parent().explode()
 	

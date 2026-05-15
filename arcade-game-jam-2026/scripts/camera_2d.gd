@@ -37,6 +37,8 @@ func more_balloons():
 	#instantiate a randomly spawning, horizontally flying enemy
 	var balloon = BALLOON.instantiate()
 	#add to scene tree
+	if get_parent().difficulty >= 1:
+		return
 	if get_parent().difficulty <= 2:
 		#normal balloons
 		balloon.global_position = Vector2(global_position.x + 60 + (215*randf()), 0)

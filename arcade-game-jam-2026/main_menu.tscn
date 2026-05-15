@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dek0nssedjoj8" path="res://assets/sfx/HoliznaCC0 - Where It's Safe.mp3" id="4_jix8l"]
 [ext_resource type="AudioStream" uid="uid://t2hcoptxf5id" path="res://assets/sfx/placeholderdie.wav" id="5_glbon"]
 [ext_resource type="AudioStream" uid="uid://bq68mhvhnpqa1" path="res://assets/sfx/placeholdereat.wav" id="6_nlkkf"]
+[ext_resource type="AudioStream" uid="uid://bfqirhtwv68g1" path="res://assets/sfx/drumroll.wav" id="7_qe12f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7vrkn"]
 shader = ExtResource("1_7vrkn")
@@ -123,6 +124,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("DrumRoll:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_glbon"]
 resource_name = "appear"
@@ -174,6 +187,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, false, true, false, true, false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DrumRoll:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_qe12f"]
@@ -251,6 +276,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [null, Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(0, 0.7176471, 1, 1), Color(0.047058824, 0, 0, 1)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("DrumRoll:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_nlkkf"]
 resource_name = "appear_not_bad"
@@ -302,6 +339,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, false, true, false, true, false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DrumRoll:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nlkkf"]
@@ -432,5 +481,8 @@ stream = ExtResource("5_glbon")
 
 [node name="Begin" type="AudioStreamPlayer2D" parent="." unique_id=1689323731]
 stream = ExtResource("6_nlkkf")
+
+[node name="DrumRoll" type="AudioStreamPlayer2D" parent="." unique_id=763403094]
+stream = ExtResource("7_qe12f")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

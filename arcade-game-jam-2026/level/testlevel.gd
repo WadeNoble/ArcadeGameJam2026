@@ -3,6 +3,7 @@ extends Node2D
 @onready var enemy_spawn_location: PathFollow2D = $Camera/EnemyPath/EnemySpawnLocation
 @export var total_score := 0
 @export var difficulty :=0
+var time_played := 0
 
 func _process(_delta: float) -> void:
 	total_score = $Player.score
