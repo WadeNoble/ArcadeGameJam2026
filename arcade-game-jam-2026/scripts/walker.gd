@@ -36,17 +36,16 @@ func update_animation():
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_projectiles"):
-		body.queue_free()
+		body.destroy()
 		#placeholder color, fix this later
 		#animated_sprite_2d.modulate -= Color(10,10,10,255)
-		$AnimationPlayer.play("flash")
-		health -= 1
-		if body.name == "DashEffect":
-			health -= 1
+		health -= body.damage
 		$OofSound.play()
 		#$FlashTimer.start() - want visual logic for reduced health - could just make new sprite
 		if health <= 0:
 			hide()
+		else:
+			$AnimationPlayer.play("flash")
 	
 func turn():
 	direction = -direction

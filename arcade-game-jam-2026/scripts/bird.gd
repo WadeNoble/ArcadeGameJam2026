@@ -7,6 +7,7 @@ const GRAVITY_EGG = preload("res://gravity_egg.tscn")
 @onready var animated_sprite_2d: AnimatedSprite2D = $Bird/AnimatedSprite2D
 @onready var visible_on_screen_enabler_2d: VisibleOnScreenEnabler2D = $Bird/VisibleOnScreenEnabler2D
 
+@export var health := 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,9 +29,22 @@ func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_projectiles"):
-		body.queue_free()
-		hide()
-		
+		body.destroy()
+		health -= body.damage
+		if health <= 0:
+			hide()
+		else:
+			$HitSound.play()
+			var bird_time = animation_player.current_animation_position
+			animation_player.current_animation = "flash"
+			animation_player.play()
+			await animation_player.animation_finished
+			animation_player.current_animation = "fly"
+			animated_sprite_2d.visible = false
+			animation_player.seek(bird_time)
+			animation_player.play()
+			animated_sprite_2d.visible = true
+			
 		
 func explode():
 	var splode := EXPLOSION.instantiate()

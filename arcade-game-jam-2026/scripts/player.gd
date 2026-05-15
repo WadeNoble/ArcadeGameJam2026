@@ -45,6 +45,7 @@ var is_eating := false
 
 func _ready():
 	lives = lives
+	score = score
 
 func _physics_process(delta: float) -> void:
 	# Handle jumping. Recharge double jump if grounded

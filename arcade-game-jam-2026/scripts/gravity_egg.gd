@@ -9,9 +9,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if linear_velocity.y == 0 and falling == false:
+	if linear_velocity.y <= 0.01 and falling == false:
 		score = 25
 		$AnimatedSprite2D.play("splat")
-	elif linear_velocity.y == 0:
+	elif linear_velocity.y <= 0.1:
 		falling = false
 		

@@ -54,7 +54,7 @@ func score():
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_projectiles"):
-		body.queue_free()
+		body.destroy()
 		#placeholder color, fix this later
 		#$AnimationPlayer.play("flash") if want to add health
 		health -= 1

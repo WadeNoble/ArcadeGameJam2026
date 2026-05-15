@@ -27,7 +27,6 @@ func _process(_delta: float) -> void:
 			$PauseCanvasLayer.hide()
 			$HudCanvasLayer.hide()
 			instance_dead = true
-	
 		
 	if Input.is_action_just_pressed("Start"):
 		if !is_instance_valid($World/LevelLayer/LevelRoot):
@@ -39,6 +38,7 @@ func _process(_delta: float) -> void:
 				$MainMenu.queue_free()
 			Fader.fade_in()
 			$World/LevelLayer.add_child(begin_game)
+			$HudCanvasLayer.show()
 			await $"/root/Fader/FaderTimer".timeout
 		elif $World/LevelLayer/LevelRoot.process_mode == PROCESS_MODE_INHERIT:
 			$PauseCanvasLayer.show()
