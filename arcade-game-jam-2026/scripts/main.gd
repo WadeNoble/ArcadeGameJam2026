@@ -23,7 +23,7 @@ func _process(_delta: float) -> void:
 		if get_node(level_location):
 			session_score = get_node(level_location).total_score
 			player_lives = get_node(level_location).get_node("Player").lives
-			$HudCanvasLayer/HudRoot/LivesLabel.text = "LIVES: " + str(player_lives)
+			$HudCanvasLayer/HudRoot/LivesLabel.text = "x " + str(player_lives)
 			$HudCanvasLayer/HudRoot/ScoreLabel.text = ("%06d" % session_score)
 		else:
 			$PauseCanvasLayer.hide()
@@ -32,7 +32,6 @@ func _process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("Start"):
 		if !is_instance_valid(get_node(level_location)):
-			print(get_node(level_location))
 			var begin_game = load("res://level/testlevel.tscn").instantiate()
 			level_scene.instantiate()
 			Fader.fade_out()
@@ -44,12 +43,12 @@ func _process(_delta: float) -> void:
 			$HudCanvasLayer.show()
 			await $"/root/Fader/FaderTimer".timeout
 			instance_dead = false
-		elif $World/LevelLayer/LevelRoot.process_mode == PROCESS_MODE_INHERIT:
+		elif get_node(level_location).process_mode == PROCESS_MODE_INHERIT:
 			$PauseCanvasLayer.show()
-			$World/LevelLayer/LevelRoot.process_mode = PROCESS_MODE_DISABLED
-		elif $World/LevelLayer/LevelRoot.process_mode == PROCESS_MODE_DISABLED:
+			get_node(level_location).process_mode = PROCESS_MODE_DISABLED
+		elif get_node(level_location).process_mode == PROCESS_MODE_DISABLED:
 			$PauseCanvasLayer.hide()
-			$World/LevelLayer/LevelRoot.process_mode = PROCESS_MODE_INHERIT
+			get_node(level_location).process_mode = PROCESS_MODE_INHERIT
 			
 	if Input.is_action_just_pressed("Start2"):
 		if instance_dead == true:

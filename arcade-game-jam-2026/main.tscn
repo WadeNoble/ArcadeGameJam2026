@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dmd0dly7clgeg" path="res://level/testlevel.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dxmv284minroa" path="res://main_menu.tscn" id="3_1bvp3"]
 [ext_resource type="Script" uid="uid://k5s14lnr45wy" path="res://scripts/pause.gd" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://ck1pvqm40h78f" path="res://assets/images/player/playereat_0002.png" id="4_lquwl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lquwl"]
 font_size = 18
@@ -48,18 +49,29 @@ anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
 
+[node name="TextureRect" type="TextureRect" parent="HudCanvasLayer/HudRoot" unique_id=81617671]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 34.0
+texture = ExtResource("4_lquwl")
+
 [node name="LivesLabel" type="Label" parent="HudCanvasLayer/HudRoot" unique_id=189496421]
 layout_mode = 1
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 42.0
+offset_top = 12.0
+offset_right = 82.0
+offset_bottom = 40.0
+text = "x 0"
 label_settings = SubResource("LabelSettings_lquwl")
 
 [node name="ScoreLabel" type="Label" parent="HudCanvasLayer/HudRoot" unique_id=286577536]
 layout_mode = 1
-offset_left = 1.0
-offset_top = 31.0
-offset_right = 78.0
-offset_bottom = 64.5
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 85.0
+offset_bottom = 64.0
 text = "000000"
 label_settings = SubResource("LabelSettings_h2yge")
 

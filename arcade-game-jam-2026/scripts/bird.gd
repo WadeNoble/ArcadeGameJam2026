@@ -22,9 +22,10 @@ func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
 	#can try adding non-straight flight patterns - sin() is an option
 	
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
-	if position.x <= $"../Camera".position.x:
+	if position.x + 40 <= get_parent().get_node("Camera").position.x:
 		queue_free()
 	else:
+		print("Birdpos", str(position.x), " Birdglob,", str(global_position.x) ,"TestCamera position ", str(get_parent().get_node("Camera").position.x))
 		explode()
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
@@ -35,16 +36,18 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 			hide()
 		else:
 			$HitSound.play()
-			var bird_time = animation_player.current_animation_position
-			animation_player.current_animation = "flash"
-			animation_player.play()
-			await animation_player.animation_finished
-			animation_player.current_animation = "fly"
-			animated_sprite_2d.visible = false
-			animation_player.seek(bird_time)
-			animation_player.play()
-			animated_sprite_2d.visible = true
-			
+			var alpha_tween := create_tween()
+			alpha_tween.tween_property(animated_sprite_2d, "modulate:a", 0.01, 0.05) # Fade out over 0.1s
+			alpha_tween.tween_property(animated_sprite_2d, "modulate:a", 1.0, 0.05) # Fade in over 0.1s
+			#var bird_time = animation_player.current_animation_position
+			#animation_player.current_animation = "flash"
+			#animation_player.play()
+			#await animation_player.animation_finished
+			#animated_sprite_2d.visible = false
+			#animation_player.current_animation = "fly"
+			#animation_player.seek(bird_time)
+			#animation_player.play()
+			#animated_sprite_2d.visible = true
 		
 func explode():
 	var splode := EXPLOSION.instantiate()

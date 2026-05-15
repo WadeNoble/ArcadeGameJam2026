@@ -416,16 +416,16 @@ grow_vertical = 0
 text = "000000"
 label_settings = SubResource("LabelSettings_glbon")
 
-[node name="MenuTheme" type="AudioStreamPlayer2D" parent="." unique_id=618115289]
-stream = ExtResource("4_jix8l")
-autoplay = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=668222958]
 libraries/ = SubResource("AnimationLibrary_nlkkf")
 
 [node name="DisplayTimer" type="Timer" parent="." unique_id=1775030459]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
+
+[node name="MenuTheme" type="AudioStreamPlayer2D" parent="." unique_id=618115289]
+stream = ExtResource("4_jix8l")
+autoplay = true
 
 [node name="NoMultiplayer" type="AudioStreamPlayer2D" parent="." unique_id=1077573890]
 stream = ExtResource("5_glbon")

@@ -56,7 +56,8 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	show()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	if position.x <= $"../Camera".position.x:
+	print("Guy Loc", position.x, " Cam Loc ",str(get_parent().get_node("Camera").position.x)," Cam Glob ", str(get_parent().get_node("Camera").global_position.x))
+	if position.x + 330 <= get_parent().get_node("Camera").global_position.x:
 		queue_free()
 	else:
 		explode()

@@ -46,8 +46,8 @@ func more_balloons():
 		$DifficultyTimer.wait_time -= .05
 		balloon.global_position = Vector2($"../Player".position.x - 45 + (80*randf()), 0)
 	
-	print("Camera Position ", position.x, " ", position.y)
-	print("Balloon Position 1 ", balloon.position, balloon.global_position)
+	#print("Camera Position ", position.x, " ", position.y)
+	#print("Balloon Position 1 ", balloon.position, balloon.global_position)
 	add_sibling(balloon)
 		#set actual position to that of spawn location
-	print(balloon.position)
+		#print(balloon.position)

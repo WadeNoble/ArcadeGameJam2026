@@ -22,19 +22,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	#
-	if Input.is_action_just_pressed("Start2"):
-		var prev_text : String = $Menu/MeanWords.text
-		var prev_size : int = $Menu/MeanWords.label_settings.font_size
-		$NoMultiplayer.play()
-		$Menu/MeanWords.text = "MAYBE NEXT YEAR"
-		$Menu/MeanWords.label_settings.font_size = 32
-		$DisplayTimer.start()
-		await $DisplayTimer.timeout
-		$Menu/MeanWords.text = prev_text
-		$Menu/MeanWords.label_settings.font_size = prev_size
+	pass
 		
-
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	$Menu/MeanWords.text = "PRESS 1 TO RESTART"
 	$Menu/MeanWords.label_settings.font_size = 32
@@ -46,6 +35,9 @@ func player_2():
 	$Menu/MeanWords.text = "MAYBE NEXT YEAR"
 	$Menu/MeanWords.label_settings.font_size = 32
 	$DisplayTimer.start()
+	create_tween().tween_property($Menu/MeanWords, "modulate:a",.01, .05)
+	create_tween().tween_property($Menu/MeanWords, "modulate:a", 1, .05)
 	await $DisplayTimer.timeout
 	$Menu/MeanWords.text = prev_text
 	$Menu/MeanWords.label_settings.font_size = prev_size
+	return

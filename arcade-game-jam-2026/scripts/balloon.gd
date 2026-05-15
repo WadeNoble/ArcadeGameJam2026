@@ -15,7 +15,6 @@ func _ready() -> void:
 	sprite.animation = "fall"
 	add_to_group("enemies")
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -64,7 +63,6 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 		#$FlashTimer.start() - want visual logic for reduced health - could just make new sprite
 		if health <= 0:
 			hide()
-
 
 func _on_screen_exited() -> void:
 	print("Goodbye! " + str(position.y))

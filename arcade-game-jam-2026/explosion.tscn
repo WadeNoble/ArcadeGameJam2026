@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b1uy3dbexetee" path="res://assets/images/player/explodetest.png" id="1_q7epf"]
 [ext_resource type="Script" uid="uid://dr86ym7qi7yso" path="res://scripts/explosion.gd" id="2_vxas0"]
-[ext_resource type="AudioStream" uid="uid://cusju2nhpfw7w" path="res://assets/sfx/placeholderlaser.wav" id="3_j4sxf"]
+[ext_resource type="AudioStream" uid="uid://rvbro33wkhif" path="res://assets/sfx/8bitexplode.wav" id="3_j4sxf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vxas0"]
 atlas = ExtResource("1_q7epf")
@@ -20,6 +20,10 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("1_q7epf")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_l04k4"]
+atlas = ExtResource("1_q7epf")
+region = Rect2(96, 0, 32, 8)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_kmxf7"]
 animations = [{
 "frames": [{
@@ -34,6 +38,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kmxf7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l04k4")
 }],
 "loop": false,
 "name": &"bang",
@@ -44,9 +51,12 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_kmxf7")
 animation = &"bang"
 autoplay = "bang"
-frame = 3
+frame = 4
 frame_progress = 1.0
 script = ExtResource("2_vxas0")
 
 [node name="BangSound" type="AudioStreamPlayer2D" parent="." unique_id=343996001]
 stream = ExtResource("3_j4sxf")
+volume_db = -3.0
+autoplay = true
+max_polyphony = 2
