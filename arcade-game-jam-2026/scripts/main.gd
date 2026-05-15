@@ -6,22 +6,28 @@ extends Node
 
 var session_score := 0
 var instance_dead := false
-#var player_lives := 3
+var player_lives := 3
 
 func _ready():
 	Fader.fade_in()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if instance_dead == false:
-		if is_instance_valid($World/LevelLayer/LevelRoot):
-			session_score = $World/LevelLayer/LevelRoot.total_score
-		else:
-			$PauseCanvasLayer.hide()
-			instance_dead = true
 	#Force quit for machines	
 	if Input.is_action_just_pressed("End"):
 		ggs()
+		
+	if instance_dead == false:
+		if $World/LevelLayer/LevelRoot:
+			session_score = $World/LevelLayer/LevelRoot.total_score
+			player_lives = $World/LevelLayer/LevelRoot/Player.lives
+			$HudCanvasLayer/HudRoot/LivesLabel.text = "LIVES: " + str(player_lives)
+			$HudCanvasLayer/HudRoot/ScoreLabel.text = ("%06d" % session_score)
+		else:
+			$PauseCanvasLayer.hide()
+			$HudCanvasLayer.hide()
+			instance_dead = true
+	
 		
 	if Input.is_action_just_pressed("Start"):
 		if !is_instance_valid($World/LevelLayer/LevelRoot):

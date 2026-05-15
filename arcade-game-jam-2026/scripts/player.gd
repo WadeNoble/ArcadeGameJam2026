@@ -39,7 +39,8 @@ var has_coyote_time := false
 var hard_landing := false
 var is_dying := false
 var is_eating := false
-@export var lives := 1
+
+@export var lives := 3
 @export var score := 0
 
 func _ready():
@@ -202,6 +203,11 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		hit_sound.pitch_scale = 2
 		hit_sound.play()#change to fall out sound
 		die()
+	if area.is_in_group("enemies"):
+		hit_sound.pitch_scale = 1
+		hit_sound.play() #change to a better death sound
+		die()
+		area.get_parent().explode()
 	
 func die():
 	lives -= 1

@@ -21,7 +21,10 @@ func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
 	#can try adding non-straight flight patterns - sin() is an option
 	
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
-	explode()
+	if position.x <= $"../Camera".position.x:
+		queue_free()
+	else:
+		explode()
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_projectiles"):

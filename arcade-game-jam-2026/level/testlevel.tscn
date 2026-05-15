@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://foo1m63hnjpv" path="res://enemy.tscn" id="7_h42ns"]
 [ext_resource type="AudioStream" uid="uid://bplkdgskuirqv" path="res://assets/sfx/HoliznaCC0 - Crash Landing!.ogg" id="9_fljdl"]
 [ext_resource type="PackedScene" uid="uid://byu2v0rk7gvay" path="res://egg.tscn" id="10_ctdqo"]
+[ext_resource type="FontFile" uid="uid://nnwxi2drtghp" path="res://assets/images/UI/Wingdings-Regular.ttf" id="11_ncalo"]
+[ext_resource type="PackedScene" uid="uid://dq0vhged6f1f1" path="res://balloon.tscn" id="12_nqac4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srhd0"]
 size = Vector2(32, 380)
@@ -23,11 +25,9 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0acls"]
 size = Vector2(1024, 256)
 
-[sub_resource type="SystemFont" id="SystemFont_ctdqo"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_ncalo"]
-font = SubResource("SystemFont_ctdqo")
-font_size = 64
+font = ExtResource("11_ncalo")
+font_size = 32
 font_color = Color(1, 0, 0, 1)
 
 [node name="LevelRoot" type="Node2D" unique_id=2091582755]
@@ -68,7 +68,7 @@ position = Vector2(62, 282)
 position = Vector2(564, 158)
 
 [node name="MovingBird" parent="." unique_id=6820801 instance=ExtResource("6_f73ey")]
-position = Vector2(104, 284)
+position = Vector2(400, 104)
 
 [node name="MovingBird2" parent="." unique_id=296040075 instance=ExtResource("6_f73ey")]
 position = Vector2(844, 257)
@@ -87,7 +87,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="DifficultyTimer" type="Timer" parent="Camera" unique_id=716691904]
-wait_time = 15.0
+wait_time = 10.0
 autostart = true
 
 [node name="SpawnPosition" type="Marker2D" parent="Camera" unique_id=306378604]
@@ -144,8 +144,13 @@ offset_right = 100.5
 offset_bottom = 44.666668
 grow_horizontal = 2
 grow_vertical = 2
-text = "PAUSE"
+text = "DEBUG"
 label_settings = SubResource("LabelSettings_ncalo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Balloon" parent="." unique_id=1443581478 instance=ExtResource("12_nqac4")]
+position = Vector2(96, 144)
 
 [connection signal="game_over" from="Player" to="." method="_on_player_game_over"]
 [connection signal="timeout" from="Camera/SeekerTimer" to="Camera" method="_on_seeker_timer_timeout"]

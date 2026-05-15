@@ -38,7 +38,7 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player_projectiles"):
 		body.queue_free()
 		#placeholder color, fix this later
-		animated_sprite_2d.modulate -= Color(10,10,10,255)
+		#animated_sprite_2d.modulate -= Color(10,10,10,255)
 		$AnimationPlayer.play("flash")
 		health -= 1
 		if body.name == "DashEffect":
@@ -57,10 +57,14 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	show()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	explode()
+	if position.x <= $"../Camera".position.x:
+		queue_free()
+	else:
+		explode()
 	
 func explode():
 	$Hurtbox.set_deferred("disabled", true)
+	$CollisionShape2D.set_deferred("disabled", true)
 	var splode := EXPLOSION.instantiate()
 	splode.global_position = global_position
 	death_spot = splode.global_position

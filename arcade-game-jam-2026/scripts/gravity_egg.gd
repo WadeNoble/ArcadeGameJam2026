@@ -2,9 +2,16 @@ extends RigidBody2D
 
 @export var score := 75
 
+var falling := true
+
+func _ready() -> void:
+	$AnimatedSprite2D.play("fall")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if linear_velocity.y == 0:
+	if linear_velocity.y == 0 and falling == false:
 		score = 25
 		$AnimatedSprite2D.play("splat")
+	elif linear_velocity.y == 0:
+		falling = false
 		
