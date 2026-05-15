@@ -25,12 +25,15 @@ func _process(_delta: float) -> void:
 			player_lives = get_node(level_location).get_node("Player").lives
 			$HudCanvasLayer/HudRoot/LivesLabel.text = "x " + str(player_lives)
 			$HudCanvasLayer/HudRoot/ScoreLabel.text = ("%06d" % session_score)
+			$HudCanvasLayer/HudRoot/PlayTime.text = ("%04d" % get_node(level_location).time_played)
 		else:
 			$PauseCanvasLayer.hide()
 			$HudCanvasLayer.hide()
 			instance_dead = true
 		
 	if Input.is_action_just_pressed("Start"):
+		if $"/root/Fader/FaderTimer".time_left > 0:
+			return
 		if !is_instance_valid(get_node(level_location)):
 			var begin_game = load("res://level/testlevel.tscn").instantiate()
 			level_scene.instantiate()

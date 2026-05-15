@@ -27,5 +27,16 @@ func _on_player_game_over() -> void:
 #start moving camera/boundaries faster?, increment "difficulty"?
 func _on_difficulty_timer_timeout() -> void:
 	difficulty += 1
-	if difficulty > 5:
+	if difficulty <= 5:
+		modulate = "ffffff"
+	elif difficulty > 5 and difficulty <= 11:
+		modulate = "aaffff"
+	elif difficulty > 11 and difficulty <= 17:
+		modulate = "99ffcc"
+	elif difficulty > 17 and difficulty <= 23:
 		modulate = "ffffaa"
+	else:
+		modulate = "ffaaaa"
+
+func _on_play_time_timeout() -> void:
+	time_played += 1

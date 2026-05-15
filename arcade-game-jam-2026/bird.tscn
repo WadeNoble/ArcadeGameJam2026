@@ -178,6 +178,7 @@ size = Vector2(26.5, 28)
 
 [node name="MovingBird" type="Node2D" unique_id=6820801]
 script = ExtResource("1_crnqq")
+metadata/_edit_group_ = true
 
 [node name="Bird" type="RigidBody2D" parent="." unique_id=47000230 groups=["enemies"]]
 collision_layer = 0

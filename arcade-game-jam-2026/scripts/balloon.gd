@@ -28,7 +28,9 @@ func _physics_process(delta: float) -> void:
 			velocity.y = BOUNCE_IMPULSE
 		else:
 			$CollisionShape2D.set_deferred("disabled", true)
-		
+			sprite.animation = "fall"
+			sprite.play()
+			
 	move_and_slide()
 
 

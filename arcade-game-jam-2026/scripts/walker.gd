@@ -3,7 +3,7 @@ extends CharacterBody2D
 const EXPLOSION = preload("res://explosion.tscn")
 const EGG = preload("res://egg.tscn")
 
-var speed = 100
+var speed = 50
 var direction = -1
 var health = 2
 var death_spot := Vector2(0,0)
@@ -15,6 +15,9 @@ var death_spot := Vector2(0,0)
 
 func _ready():
 	add_to_group("enemies")
+	if get_parent().difficulty > 5:
+		health += 1
+		speed += 50
 
 func _physics_process(delta: float) -> void:
 	#should never leave the platform, but just in case

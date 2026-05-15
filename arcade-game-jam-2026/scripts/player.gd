@@ -229,7 +229,7 @@ func die():
 	died.emit()
 	hurtbox_shape.set_deferred("disabled", true)
 	animation_player.play("flash")
-	position.y = 0
+	position.y = -50
 
 func eat():
 	$EatSound.play()

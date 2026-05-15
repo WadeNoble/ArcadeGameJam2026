@@ -7,11 +7,13 @@ const GRAVITY_EGG = preload("res://gravity_egg.tscn")
 @onready var animated_sprite_2d: AnimatedSprite2D = $Bird/AnimatedSprite2D
 @onready var visible_on_screen_enabler_2d: VisibleOnScreenEnabler2D = $Bird/VisibleOnScreenEnabler2D
 
-@export var health := 2
+@export var health := 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	animated_sprite_2d.play("flap")
+	if get_parent().difficulty > 5:
+		health += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

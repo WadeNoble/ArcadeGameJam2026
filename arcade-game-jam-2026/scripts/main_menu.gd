@@ -3,8 +3,8 @@ extends Control
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 var score := 0
 
-const BAD := 200
-const NOT_BAD := 2000
+const BAD := 250
+const NOT_BAD := 2500
 const GREAT := 10000
 
 func _ready() -> void:

@@ -166,6 +166,7 @@ _data = {
 collision_mask = 194
 floor_max_angle = 1.3089969
 script = ExtResource("1_onrkg")
+metadata/_edit_group_ = true
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1857952113]
 stream = ExtResource("5_sweqy")

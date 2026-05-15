@@ -21,12 +21,18 @@ font_size = 18
 font_color = Color(0, 0, 0, 1)
 outline_size = 6
 
+[sub_resource type="LabelSettings" id="LabelSettings_272bh"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+outline_size = 6
+
 [sub_resource type="SystemFont" id="SystemFont_h2yge"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1bvp3"]
 font = SubResource("SystemFont_h2yge")
 font_size = 64
 font_color = Color(1, 0, 0, 1)
+outline_size = 8
 
 [node name="MainGame" type="Node" unique_id=187935485]
 script = ExtResource("1_0xm2m")
@@ -87,6 +93,18 @@ offset_bottom = 33.250008
 grow_horizontal = 0
 label_settings = SubResource("LabelSettings_7mycd")
 horizontal_alignment = 2
+
+[node name="PlayTime" type="Label" parent="HudCanvasLayer/HudRoot" unique_id=29229822]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_272bh")
+horizontal_alignment = 1
 
 [node name="PauseCanvasLayer" type="CanvasLayer" parent="." unique_id=1410220163]
 process_mode = 2
