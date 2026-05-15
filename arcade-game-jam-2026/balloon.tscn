@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://dq0vhged6f1f1"]
+
+[ext_resource type="Texture2D" uid="uid://c68l848dofkkk" path="res://assets/images/enemy/enemyballoon_0001.png" id="1_4emby"]
+[ext_resource type="Script" uid="uid://bk6gj46gn4bln" path="res://scripts/balloon.gd" id="1_jj3vs"]
+[ext_resource type="Texture2D" uid="uid://cjsu8kngp75gc" path="res://assets/images/enemy/enemyballoon_0003.png" id="2_jj3vs"]
+[ext_resource type="Texture2D" uid="uid://cukrfrbk4f8gw" path="res://assets/images/enemy/enemyballoon_0004.png" id="2_wxbh2"]
+[ext_resource type="Texture2D" uid="uid://bt5evtqpyjjfb" path="res://assets/images/enemy/enemyballoon_0002.png" id="3_wxbh2"]
+[ext_resource type="AudioStream" uid="uid://b02pk3heqjmbs" path="res://assets/sfx/placeholderunf.wav" id="6_4nd2f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4nd2f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wxbh2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jj3vs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wxbh2")
+}],
+"loop": false,
+"name": &"bounce",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4emby")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wxbh2")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2iu8"]
+size = Vector2(30, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxbh2"]
+size = Vector2(34, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4nd2f"]
+size = Vector2(27, 21)
+
+[node name="Balloon" type="CharacterBody2D" unique_id=1443581478]
+collision_layer = 8
+collision_mask = 66
+slide_on_ceiling = false
+script = ExtResource("1_jj3vs")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=944451513]
+sprite_frames = SubResource("SpriteFrames_4nd2f")
+animation = &"bounce"
+autoplay = "fall"
+frame = 2
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1578123535]
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_x2iu8")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=193041204]
+collision_layer = 256
+collision_mask = 4
+
+[node name="HurtboxShape" type="CollisionShape2D" parent="Hurtbox" unique_id=1027739438]
+shape = SubResource("RectangleShape2D_wxbh2")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=419302152 groups=["enemies"]]
+collision_layer = 40
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox" unique_id=1500736619]
+position = Vector2(0.5, 3.5)
+shape = SubResource("RectangleShape2D_4nd2f")
+debug_color = Color(0.9835207, 0, 0.35659987, 0.41960785)
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=94554612]
+
+[node name="OofSound" type="AudioStreamPlayer2D" parent="." unique_id=1819142553]
+stream = ExtResource("6_4nd2f")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1430269652]
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_screen_exited"]

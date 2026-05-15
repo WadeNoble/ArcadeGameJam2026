@@ -2,7 +2,24 @@
 
 [ext_resource type="Script" uid="uid://ccqv68et5vkw8" path="res://scripts/main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://dmd0dly7clgeg" path="res://level/testlevel.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dxmv284minroa" path="res://main_menu.tscn" id="3_1bvp3"]
 [ext_resource type="Script" uid="uid://k5s14lnr45wy" path="res://scripts/pause.gd" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://ck1pvqm40h78f" path="res://assets/images/player/playereat_0002.png" id="4_lquwl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lquwl"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+outline_size = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2yge"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+outline_size = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_7mycd"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+outline_size = 6
 
 [sub_resource type="SystemFont" id="SystemFont_h2yge"]
 
@@ -19,17 +36,57 @@ level_scene = ExtResource("1_ig7tw")
 
 [node name="LevelLayer" type="Node2D" parent="World" unique_id=1818238437]
 
-[node name="LevelRoot" parent="World/LevelLayer" unique_id=2091582755 instance=ExtResource("1_ig7tw")]
-
 [node name="Entities" type="Node2D" parent="World" unique_id=1864856940]
 
+[node name="MainMenu" parent="." unique_id=1909294033 instance=ExtResource("3_1bvp3")]
+
 [node name="HudCanvasLayer" type="CanvasLayer" parent="." unique_id=826517499]
+visible = false
 
 [node name="HudRoot" type="Control" parent="HudCanvasLayer" unique_id=96838891]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
+
+[node name="TextureRect" type="TextureRect" parent="HudCanvasLayer/HudRoot" unique_id=81617671]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 34.0
+texture = ExtResource("4_lquwl")
+
+[node name="LivesLabel" type="Label" parent="HudCanvasLayer/HudRoot" unique_id=189496421]
+layout_mode = 1
+offset_left = 42.0
+offset_top = 12.0
+offset_right = 82.0
+offset_bottom = 40.0
+text = "x 0"
+label_settings = SubResource("LabelSettings_lquwl")
+
+[node name="ScoreLabel" type="Label" parent="HudCanvasLayer/HudRoot" unique_id=286577536]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 85.0
+offset_bottom = 64.0
+text = "000000"
+label_settings = SubResource("LabelSettings_h2yge")
+
+[node name="Player2" type="Label" parent="HudCanvasLayer/HudRoot" unique_id=1050775021]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -47.909973
+offset_top = 7.25
+offset_right = -7.909973
+offset_bottom = 33.250008
+grow_horizontal = 0
+label_settings = SubResource("LabelSettings_7mycd")
+horizontal_alignment = 2
 
 [node name="PauseCanvasLayer" type="CanvasLayer" parent="." unique_id=1410220163]
 process_mode = 2
@@ -62,5 +119,9 @@ label_settings = SubResource("LabelSettings_1bvp3")
 [node name="IdleTimeout" type="Timer" parent="." unique_id=411288496]
 wait_time = 180.0
 autostart = true
+
+[node name="NextYear" type="Timer" parent="." unique_id=1996128699]
+wait_time = 2.0
+one_shot = true
 
 [connection signal="timeout" from="IdleTimeout" to="." method="ggs"]
