@@ -3,9 +3,11 @@ extends Node
 @export var level_scene: PackedScene
 
 @onready var idle_timeout: Timer = $IdleTimeout
+@onready var level_location:= "World/LevelLayer/LevelRoot"
+@onready var main_menu_location:= "MainMenu"
 
 var session_score := 0
-var instance_dead := false
+var instance_dead := true
 var player_lives := 3
 
 func _ready():
@@ -18,9 +20,9 @@ func _process(_delta: float) -> void:
 		ggs()
 		
 	if instance_dead == false:
-		if $World/LevelLayer/LevelRoot:
-			session_score = $World/LevelLayer/LevelRoot.total_score
-			player_lives = $World/LevelLayer/LevelRoot/Player.lives
+		if get_node(level_location):
+			session_score = get_node(level_location).total_score
+			player_lives = get_node(level_location).get_node("Player").lives
 			$HudCanvasLayer/HudRoot/LivesLabel.text = "LIVES: " + str(player_lives)
 			$HudCanvasLayer/HudRoot/ScoreLabel.text = ("%06d" % session_score)
 		else:
@@ -29,7 +31,8 @@ func _process(_delta: float) -> void:
 			instance_dead = true
 		
 	if Input.is_action_just_pressed("Start"):
-		if !is_instance_valid($World/LevelLayer/LevelRoot):
+		if !is_instance_valid(get_node(level_location)):
+			print(get_node(level_location))
 			var begin_game = load("res://level/testlevel.tscn").instantiate()
 			level_scene.instantiate()
 			Fader.fade_out()
@@ -40,6 +43,7 @@ func _process(_delta: float) -> void:
 			$World/LevelLayer.add_child(begin_game)
 			$HudCanvasLayer.show()
 			await $"/root/Fader/FaderTimer".timeout
+			instance_dead = false
 		elif $World/LevelLayer/LevelRoot.process_mode == PROCESS_MODE_INHERIT:
 			$PauseCanvasLayer.show()
 			$World/LevelLayer/LevelRoot.process_mode = PROCESS_MODE_DISABLED
@@ -47,6 +51,15 @@ func _process(_delta: float) -> void:
 			$PauseCanvasLayer.hide()
 			$World/LevelLayer/LevelRoot.process_mode = PROCESS_MODE_INHERIT
 			
+	if Input.is_action_just_pressed("Start2"):
+		if instance_dead == true:
+			if get_node(main_menu_location):
+				get_node(main_menu_location).player_2()
+		else:
+			$HudCanvasLayer/HudRoot/Player2.text = "MAYBE NEXT YEAR"
+			$NextYear.start()
+			await $NextYear.timeout
+			$HudCanvasLayer/HudRoot/Player2.text = ""
 	
 	if Input.is_anything_pressed():
 		#print(180 - idle_timeout.time_left)

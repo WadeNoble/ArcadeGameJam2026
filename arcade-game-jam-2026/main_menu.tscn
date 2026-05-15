@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://cyh7krqp4x65r" path="res://scripts/main_menu.gd" id="1_fu7sn"]
 [ext_resource type="Texture2D" uid="uid://cbd4clyjjmn51" path="res://assets/images/UI/testmenuBG.png" id="2_fu7sn"]
 [ext_resource type="AudioStream" uid="uid://dek0nssedjoj8" path="res://assets/sfx/HoliznaCC0 - Where It's Safe.mp3" id="4_jix8l"]
+[ext_resource type="AudioStream" uid="uid://t2hcoptxf5id" path="res://assets/sfx/placeholderdie.wav" id="5_glbon"]
+[ext_resource type="AudioStream" uid="uid://bq68mhvhnpqa1" path="res://assets/sfx/placeholdereat.wav" id="6_nlkkf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7vrkn"]
 shader = ExtResource("1_7vrkn")
@@ -420,5 +422,15 @@ autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=668222958]
 libraries/ = SubResource("AnimationLibrary_nlkkf")
+
+[node name="DisplayTimer" type="Timer" parent="." unique_id=1775030459]
+wait_time = 3.0
+one_shot = true
+
+[node name="NoMultiplayer" type="AudioStreamPlayer2D" parent="." unique_id=1077573890]
+stream = ExtResource("5_glbon")
+
+[node name="Begin" type="AudioStreamPlayer2D" parent="." unique_id=1689323731]
+stream = ExtResource("6_nlkkf")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
