@@ -3,7 +3,7 @@ extends CharacterBody2D
 const EXPLOSION = preload("res://explosion.tscn")
 const EGG = preload("res://egg.tscn")
 
-var speed = 50
+var speed = 0
 var direction = -1
 var health = 2
 var death_spot := Vector2(0,0)
@@ -56,7 +56,7 @@ func turn():
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
-	show()
+	speed = 50
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	print("Guy Loc", position.x, " Cam Loc ",str(get_parent().get_node("Camera").position.x)," Cam Glob ", str(get_parent().get_node("Camera").global_position.x))

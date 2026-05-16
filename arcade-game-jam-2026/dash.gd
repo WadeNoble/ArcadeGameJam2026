@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-@export var damage := 2
+@export var damage := 3
 
 func destroy() -> void:
 	await $Plume.animation_finished

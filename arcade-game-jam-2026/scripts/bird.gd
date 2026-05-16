@@ -20,11 +20,14 @@ func _process(_delta: float) -> void:
 	pass
 
 func _on_visible_on_screen_enabler_2d_screen_entered() -> void:
-	animation_player.play("fly")
+	if position.x >= get_parent().get_node("Player").position.x:
+		animation_player.play("fly")
+	elif position.x < get_parent().get_node("Player").position.x:
+		animation_player.play("fly_right")
 	#can try adding non-straight flight patterns - sin() is an option
 	
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
-	if position.x + 40 <= get_parent().get_node("Camera").position.x:
+	if get_node("Bird").global_position.x + 320 <= get_parent().get_node("Camera").position.x:
 		queue_free()
 	else:
 		print("Birdpos", str(position.x), " Birdglob,", str(global_position.x) ,"TestCamera position ", str(get_parent().get_node("Camera").position.x))

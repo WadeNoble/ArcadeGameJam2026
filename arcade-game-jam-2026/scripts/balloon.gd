@@ -66,6 +66,9 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 		if health <= 0:
 			hide()
 
+func _on_screen_entered() -> void:
+	pass
+
 func _on_screen_exited() -> void:
 	print("Goodbye! " + str(position.y))
 	if position.y >= 360:
