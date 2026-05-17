@@ -80,6 +80,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [0.0039215684]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:collision_mask")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_cchwj"]
 resource_name = "flash"
@@ -95,46 +107,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0.003921569), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_6ljjq"]
-resource_name = "flash_fly"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2, 4),
-"transitions": PackedFloat32Array(1, 1, 3, 1),
-"update": 0,
-"values": [Vector2(-6, 0), Vector2(-5, 10), Vector2(0, 0), Vector2(-640, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:collision_layer")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 32]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:modulate:a")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0039215684, 0.0039215684]
 }
 
 [sub_resource type="Animation" id="Animation_crnqq"]
@@ -165,12 +137,52 @@ tracks/1/keys = {
 "values": [0, 32]
 }
 
+[sub_resource type="Animation" id="Animation_6ljjq"]
+resource_name = "fly_right"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 6),
+"transitions": PackedFloat32Array(0.4204483, 1, 2.0000005, 3.2830184),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(50, 5), Vector2(150, 0), Vector2(2000, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:collision_layer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 32]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:collision_mask")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [128]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j88tq"]
 _data = {
 &"RESET": SubResource("Animation_g5k2s"),
 &"flash": SubResource("Animation_cchwj"),
-&"flash_fly": SubResource("Animation_6ljjq"),
-&"fly": SubResource("Animation_crnqq")
+&"fly": SubResource("Animation_crnqq"),
+&"fly_right": SubResource("Animation_6ljjq")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crnqq"]
@@ -178,6 +190,7 @@ size = Vector2(26.5, 28)
 
 [node name="MovingBird" type="Node2D" unique_id=6820801]
 script = ExtResource("1_crnqq")
+metadata/_edit_group_ = true
 
 [node name="Bird" type="RigidBody2D" parent="." unique_id=47000230 groups=["enemies"]]
 collision_layer = 0

@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://dpvpfad1ngbo7" path="res://scripts/duster.gd" id="7_dw050"]
 [ext_resource type="AudioStream" uid="uid://bq68mhvhnpqa1" path="res://assets/sfx/placeholdereat.wav" id="9_b26j0"]
 [ext_resource type="Script" uid="uid://c2y8kfupbbgo2" path="res://scripts/exploder.gd" id="11_ivps1"]
-[ext_resource type="Texture2D" uid="uid://dwgr8gfncvj8o" path="res://assets/images/player/testlivesbg.png" id="11_nvl01"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bwjto"]
 atlas = ExtResource("5_urp6f")
@@ -167,7 +166,7 @@ _data = {
 collision_mask = 194
 floor_max_angle = 1.3089969
 script = ExtResource("1_onrkg")
-lives = 1
+metadata/_edit_group_ = true
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="." unique_id=1857952113]
 stream = ExtResource("5_sweqy")
@@ -240,6 +239,7 @@ position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_dw050")
 
 [node name="Label" type="Label" parent="." unique_id=273622865]
+visible = false
 offset_left = -16.0
 offset_top = -27.0
 offset_right = 16.0
@@ -255,14 +255,6 @@ collision_mask = 168
 [node name="HurtboxShape" type="CollisionShape2D" parent="Hurtbox" unique_id=1944196357]
 position = Vector2(0, -0.625)
 shape = SubResource("RectangleShape2D_b26j0")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=16321611]
-visible = false
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer" unique_id=2090767437]
-scale = Vector2(6, 3)
-texture = ExtResource("11_nvl01")
-region_rect = Rect2(0, 0, 144.79996, 106.79999)
 
 [node name="Coinbox" type="Area2D" parent="." unique_id=1526114472]
 collision_layer = 0

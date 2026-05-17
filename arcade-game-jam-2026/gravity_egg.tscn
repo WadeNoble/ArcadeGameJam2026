@@ -46,3 +46,11 @@ offset = Vector2(0, 2)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1356642380]
 position = Vector2(1, 1.5)
 shape = SubResource("RectangleShape2D_wfytc")
+
+[node name="DespawnTimer" type="Timer" parent="." unique_id=281046543]
+wait_time = 6.0
+one_shot = true
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=548436318]
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
