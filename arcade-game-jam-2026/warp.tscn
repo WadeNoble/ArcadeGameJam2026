@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dai0qd5oevh4w"]
+
+[ext_resource type="Texture2D" uid="uid://c6vxnoqr2m6yv" path="res://assets/images/level/warp_0001.png" id="1_163pd"]
+[ext_resource type="Texture2D" uid="uid://bxbjrfbcbnyaw" path="res://assets/images/level/warp_0002.png" id="2_gyw76"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o3jed"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_163pd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gyw76")
+}],
+"loop": true,
+"name": &"glow",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_163pd"]
+radius = 30.805843
+
+[node name="Warp" type="Area2D" unique_id=1302134716 groups=["game_end"]]
+collision_layer = 16
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1459524249]
+sprite_frames = SubResource("SpriteFrames_o3jed")
+animation = &"glow"
+autoplay = "glow"
+frame_progress = 0.24843171
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1809250323]
+rect = Rect2(-32, -32, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=569123697]
+position = Vector2(2, 3)
+shape = SubResource("CircleShape2D_163pd")

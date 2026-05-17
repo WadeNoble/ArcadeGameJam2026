@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://t2hcoptxf5id" path="res://assets/sfx/placeholderdie.wav" id="5_glbon"]
 [ext_resource type="AudioStream" uid="uid://bq68mhvhnpqa1" path="res://assets/sfx/placeholdereat.wav" id="6_nlkkf"]
 [ext_resource type="AudioStream" uid="uid://bfqirhtwv68g1" path="res://assets/sfx/drumroll.wav" id="7_qe12f"]
+[ext_resource type="AudioStream" uid="uid://7lkfjev2ypa6" path="res://assets/sfx/HoliznaCC0 - 2nd Dimension.ogg" id="8_8qtwp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7vrkn"]
 shader = ExtResource("1_7vrkn")
@@ -474,7 +475,6 @@ one_shot = true
 
 [node name="MenuTheme" type="AudioStreamPlayer2D" parent="." unique_id=618115289]
 stream = ExtResource("4_jix8l")
-autoplay = true
 
 [node name="NoMultiplayer" type="AudioStreamPlayer2D" parent="." unique_id=1077573890]
 stream = ExtResource("5_glbon")
@@ -484,5 +484,8 @@ stream = ExtResource("6_nlkkf")
 
 [node name="DrumRoll" type="AudioStreamPlayer2D" parent="." unique_id=763403094]
 stream = ExtResource("7_qe12f")
+
+[node name="FirstTimeTheme" type="AudioStreamPlayer2D" parent="." unique_id=142316441]
+stream = ExtResource("8_8qtwp")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -244,6 +244,9 @@ func _on_coinbox_area_entered(area: Area2D) -> void:
 		jump_sound.pitch_scale = 2
 		jump_sound.play()
 		velocity.y = JUMP_VELOCITY * 2
+	if area.is_in_group("game_end"):
+		lives = 1
+		die()
 
 func _on_coinbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("pickups"):
