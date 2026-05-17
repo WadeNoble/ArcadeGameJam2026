@@ -70,7 +70,6 @@ func _on_screen_entered() -> void:
 	pass
 
 func _on_screen_exited() -> void:
-	print("Goodbye! " + str(position.y))
 	if position.y >= 360:
 		queue_free()
 	else:

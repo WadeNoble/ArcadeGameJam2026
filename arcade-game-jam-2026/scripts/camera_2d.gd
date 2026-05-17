@@ -13,7 +13,7 @@ func _process(delta):
 func _on_seeker_timer_timeout() -> void:
 	more_birds()
 	more_balloons()
-	if get_parent().difficulty > 0:
+	if get_parent().difficulty: #> 0#
 		harder_birds()
 		print("There he is!")
 
@@ -42,7 +42,7 @@ func more_birds():
 func harder_birds():
 	#birds that fly to the right!
 	var bird = BIRD.instantiate()
-	bird.global_position = Vector2(global_position.x - 300, 30 + (215*randf()))
+	bird.global_position = Vector2(global_position.x-300, 30 + (215*randf()))
 	add_sibling(bird)
 
 func more_balloons():

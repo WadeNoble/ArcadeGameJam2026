@@ -80,6 +80,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [0.0039215684]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:collision_mask")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_cchwj"]
 resource_name = "flash"
@@ -136,9 +148,9 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 2, 6),
-"transitions": PackedFloat32Array(1, 1, 2.0000005, 3.2830184),
+"transitions": PackedFloat32Array(0.4204483, 1, 2.0000005, 3.2830184),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(50, 5), Vector2(50, 0), Vector2(2000, 0)]
+"values": [Vector2(0, 0), Vector2(50, 5), Vector2(150, 0), Vector2(2000, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -151,6 +163,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 32]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:collision_mask")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [128]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j88tq"]
