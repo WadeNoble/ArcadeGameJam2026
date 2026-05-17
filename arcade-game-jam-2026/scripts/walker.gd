@@ -43,12 +43,12 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 		#placeholder color, fix this later
 		#animated_sprite_2d.modulate -= Color(10,10,10,255)
 		health -= body.damage
-		$OofSound.play()
 		#$FlashTimer.start() - want visual logic for reduced health - could just make new sprite
 		if health <= 0:
 			hide()
 		else:
 			$AnimationPlayer.play("flash")
+		$OofSound.play()
 	
 func turn():
 	direction = -direction

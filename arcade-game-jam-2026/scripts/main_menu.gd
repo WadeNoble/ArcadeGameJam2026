@@ -8,13 +8,15 @@ const NOT_BAD := 2500
 const GREAT := 10000
 
 func _ready() -> void:
+	$MenuTheme.play()
 	score = get_parent().session_score
 	$"Menu/Score".text = ("%06d" % [score])
 	if get_parent().player_lives >=1:
+		$MenuTheme.stop()
 		$Menu/MeanWords.text = "SCRAMBLE!"
 		$Menu/FinalScore.text = " PRESS <1> TO BEGIN!"
 		$Menu/Score.text = ""
-		$MenuTheme.stop()
+		$FirstTimeTheme.play()
 		#set first time menu theme
 	elif score <= BAD:
 		animation_player.current_animation = "appear"
